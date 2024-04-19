@@ -21,7 +21,7 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
+      "name": "Support and feedback",
       "url": "mailto:team@loanscape.io"
     }
   ],
@@ -53,15 +53,6 @@
     {
       "group": "Mintly Guides",
       "pages": [
-        "mintly_guides/introduction",
-        "mintly_guides/quickstart",
-        "mintly_guides/development",
-        "mintly_guides/markdown",
-        "mintly_guides/code",
-        "mintly_guides/images",
-        "mintly_guides/settings",
-        "mintly_guides/navigation",
-        "mintly_guides/reusable-snippets"
       ]
     }
   ],

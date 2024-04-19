@@ -21,7 +21,7 @@
   "paths": {
     "/applications": {
       "get": {
-        "description": "Returns a list of applications with basic data for each application (simply the id of each application).",
+        "description": "Returns a list of applications with basic data for each application.",
         "responses": {
           "200": {
             "description": "List of applications returned",
@@ -97,6 +97,10 @@
           "_id": {
             "description": "The application ID.",
             "type": "string"
+          },
+          "dateCreated": { 
+            "description": "The date that the application was created. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "type": "string" 
           }
         }
       },
