@@ -91,6 +91,25 @@
   },
   "components": {
     "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string" },
+          "name": { "type": "string" },
+          "email": { "type": "string" },
+          "phone": { "type": "string" }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "line1": { "type": "string" },
+          "line2": { "type": "string" },
+          "city": { "type": "string" },
+          "state": { "type": "string" },
+          "zip": { "type": "string" }
+        }
+      },
       "LightApplication": {
         "type": "object",
         "properties": {
@@ -128,26 +147,12 @@
           },
           "assignedAccountExecutive": {
             "description": "Details of the assigned account executive on the lender's team.",
-            "type": "object",
-            "properties": {
-              "_id": { "type": "string" },
-              "name": { "type": "string" },
-              "email": { "type": "string" },
-              "phone": { "type": "string" }
-            }
+            "$ref": "#/components/schemas/User"
           },
           "assignedUsers": {
             "description": "Details of the assigned users on the lender's team.",
             "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "_id": { "type": "string" },
-                "name": { "type": "string" },
-                "email": { "type": "string" },
-                "phone": { "type": "string" }
-              }
-            }
+            "items": { "$ref": "#/components/schemas/User" }
           },
           "tag": { 
             "description": "The tag assigned by the lender's team.",
@@ -163,25 +168,12 @@
             "properties": {
               "name": { "type": "string" },
               "nmls": { "type": "string" },
-              "address": {
-                "type": "object",
-                "properties": {
-                  "line1": { "type": "string" },
-                  "line2": { "type": "string" },
-                  "city": { "type": "string" },
-                  "state": { "type": "string" },
-                  "zip": { "type": "string" }
-                }
-              },
+              "address": { "$ref": "#/components/schemas/Address" },
               "ein": { "type": "string" },
               "pointOfContact": {
                 "type": "object",
                 "description": "The point of contact indicated on the broker's company.",
-                "properties": {
-                  "name": { "type": "string" },
-                  "email": { "type": "string" },
-                  "phone": { "type": "string" }
-                }
+                "properties": { "$ref": "#/components/schemas/User" }
               },
               "dbas": {
                 "type": "array",
@@ -247,16 +239,7 @@
                   "properties": {
                     "affiliationType": { "type": "string" },
                     "companyName": { "type": "string" },
-                    "address": {
-                      "type": "object",
-                      "properties": {
-                        "line1": { "type": "string" },
-                        "line2": { "type": "string" },
-                        "city": { "type": "string" },
-                        "state": { "type": "string" },
-                        "zip": { "type": "string" }
-                      }
-                    },
+                    "address": { "$ref": "#/components/schemas/Address" },
                     "stateOfIncorporation": { "type": "string" },
                     "stateOfOperation": { "type": "string" },
                     "percentOwnership": { 
@@ -284,16 +267,7 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "address": {
-                      "type": "object",
-                      "properties": {
-                        "line1": { "type": "string" },
-                        "line2": { "type": "string" },
-                        "city": { "type": "string" },
-                        "state": { "type": "string" },
-                        "zip": { "type": "string" }
-                      }
-                    },
+                    "address": { "$ref": "#/components/schemas/Address" },
                     "nmls": { "type": "string" },
                     "managerNmls": { "type": "string" }
                   }
@@ -306,22 +280,10 @@
                   "properties": {
                     "companyName": { "type": "string" },
                     "companyNmls": { "type": "string" },
-                    "address": {
-                      "type": "object",
-                      "properties": {
-                        "line1": { "type": "string" },
-                        "line2": { "type": "string" },
-                        "city": { "type": "string" },
-                        "state": { "type": "string" },
-                        "zip": { "type": "string" }
-                      }
-                    },
+                    "address": { "$ref": "#/components/schemas/Address" },
                     "phone": { "type": "string" },
                     "email": { "type": "string" },
-                    "pointOfContact": { 
-                      "description": "The name of the point of contact.",
-                      "type": "string"
-                    }
+                    "pointOfContact": { "type": "string" }
                   }
                 }
               }
