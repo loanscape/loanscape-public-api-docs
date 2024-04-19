@@ -1,10 +1,10 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
+    "title": "Loanscape API",
+    "description": "The Loanscape API allows lenders to fetch data for their applications on Loanscape.",
     "license": {
-      "name": "MIT"
+      "name": "UNLICENSED"
     },
     "version": "1.0.0"
   },
@@ -19,72 +19,25 @@
     }
   ],
   "paths": {
-    "/plants": {
+    "/applications": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
+        "description": "Returns a list of applications with basic data for each application (simply the id of each application).",
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "List of applications returned",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Plant"
+                    "$ref": "#/components/schemas/LightApplication"
                   }
                 }
               }
             }
           },
           "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
+            "description": "Error returned",
             "content": {
               "application/json": {
                 "schema": {
@@ -96,14 +49,14 @@
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
+    "/applications/{_id}": {
+      "get": {
+        "description": "Returns full data for a given application.",
         "parameters": [
           {
-            "name": "id",
+            "name": "_id",
             "in": "path",
-            "description": "ID of plant to delete",
+            "description": "The _id of the application to fetch.",
             "required": true,
             "schema": {
               "type": "integer",
@@ -112,12 +65,18 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
+          "200": {
+            "description": "Application data returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FullApplication"
+                }
+              }
+            }
           },
           "400": {
-            "description": "unexpected error",
+            "description": "Error returned",
             "content": {
               "application/json": {
                 "schema": {
@@ -132,47 +91,245 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
+      "LightApplication": {
         "type": "object",
         "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
+          "_id": {
+            "description": "The application ID.",
             "type": "string"
           }
         }
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
+      "FullApplication": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "description": "The application ID.",
+            "type": "string"
           },
-          {
-            "required": [
-              "id"
-            ],
+          "status": {
+            "description": "The status of the application.",
+            "type": "string"
+          },
+          "dateCreated": { 
+            "description": "The date that the application was created. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "type": "string" 
+          },
+          "dateStatusUpdated": { 
+            "description": "The date that the application's status was last updated (for example, approved or renewed). This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "type": "string" 
+          },
+          "channels": {
+            "description": "The channels associated with the application.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "assignedAccountExecutive": {
+            "description": "Details of the assigned account executive on the lender's team.",
             "type": "object",
             "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
+              "_id": { "type": "string" },
+              "name": { "type": "string" },
+              "email": { "type": "string" },
+              "phone": { "type": "string" }
+            }
+          },
+          "assignedUsers": {
+            "description": "Details of the assigned users on the lender's team.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": { "type": "string" },
+                "name": { "type": "string" },
+                "email": { "type": "string" },
+                "phone": { "type": "string" }
+              }
+            }
+          },
+          "tag": { 
+            "description": "The tag assigned by the lender's team.",
+            "type": "string"
+          },
+          "nextDocumentDueDate": {
+            "description": "The date that the next document becomes due from the broker.", 
+            "type": "string" 
+          },
+          "broker": {
+            "type": "object",
+            "description": "Details of the broker's company.",
+            "properties": {
+              "name": { "type": "string" },
+              "nmls": { "type": "string" },
+              "address": {
+                "type": "object",
+                "properties": {
+                  "line1": { "type": "string" },
+                  "line2": { "type": "string" },
+                  "city": { "type": "string" },
+                  "state": { "type": "string" },
+                  "zip": { "type": "string" }
+                }
+              },
+              "ein": { "type": "string" },
+              "pointOfContact": {
+                "type": "object",
+                "description": "The point of contact indicated on the broker's company.",
+                "properties": {
+                  "name": { "type": "string" },
+                  "email": { "type": "string" },
+                  "phone": { "type": "string" }
+                }
+              },
+              "dbas": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "states": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  }
+                }
+              },
+              "companyTypes": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "operatingStates": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "suretyBonds": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "company": { "type": "string" },
+                    "amount": { 
+                      "description": "Amount is a number (e.g. 500) and indicates US dollars.",
+                      "type": "number" 
+                    },
+                    "states": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "expiryDate": { "type": "string" }
+                  }
+                }
+              },
+              "eoInsurance": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "company": { "type": "string" },
+                    "amount": { 
+                      "description": "Amount is a number (e.g. 500) and indicates US dollars.",
+                      "type": "number" 
+                    },
+                    "states": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "expiryDate": { "type": "string" }
+                  }
+                }
+              },
+              "affiliations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "affiliationType": { "type": "string" },
+                    "companyName": { "type": "string" },
+                    "address": {
+                      "type": "object",
+                      "properties": {
+                        "line1": { "type": "string" },
+                        "line2": { "type": "string" },
+                        "city": { "type": "string" },
+                        "state": { "type": "string" },
+                        "zip": { "type": "string" }
+                      }
+                    },
+                    "stateOfIncorporation": { "type": "string" },
+                    "stateOfOperation": { "type": "string" },
+                    "percentOwnership": { 
+                      "description": "Number given indicates percent as an integer, not a decimal. For example, 50 indicates 50%.",
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "industryApprovals": {
+                "type": "object",
+                "properties": {
+                  "fha": { "type": "string" },
+                  "va": { "type": "string" },
+                  "fannieMae": { "type": "string" },
+                  "freddieMac": { "type": "string" },
+                  "mers": { "type": "string" },
+                  "usda": { "type": "string" },
+                  "fdic": { "type": "string" },
+                  "ncua": { "type": "string" }
+                }
+              },
+              "branches": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "address": {
+                      "type": "object",
+                      "properties": {
+                        "line1": { "type": "string" },
+                        "line2": { "type": "string" },
+                        "city": { "type": "string" },
+                        "state": { "type": "string" },
+                        "zip": { "type": "string" }
+                      }
+                    },
+                    "nmls": { "type": "string" },
+                    "managerNmls": { "type": "string" }
+                  }
+                }
+              },
+              "contractProcessors": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "companyName": { "type": "string" },
+                    "companyNmls": { "type": "string" },
+                    "address": {
+                      "type": "object",
+                      "properties": {
+                        "line1": { "type": "string" },
+                        "line2": { "type": "string" },
+                        "city": { "type": "string" },
+                        "state": { "type": "string" },
+                        "zip": { "type": "string" }
+                      }
+                    },
+                    "phone": { "type": "string" },
+                    "email": { "type": "string" },
+                    "pointOfContact": { 
+                      "description": "The name of the point of contact.",
+                      "type": "string"
+                    }
+                  }
+                }
               }
             }
           }
-        ]
-      },
+        }
+      },      
       "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
         "type": "object",
         "properties": {
           "error": {
