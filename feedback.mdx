@@ -8,18 +8,19 @@ We're open to general ideas and suggestions, and have also listed some questions
 
 ### General
 
-1. Are there any use cases not covered by the current reference - for example, you'd like to perform a full sync periodically and return full data for *all applications* with one endpoint?
-2. Can we improve the format of the data returned (or the format of the endpoints and parameters themselves)?
+1. Should we implement webhooks to notify users of new applications, or updates to existing applications?
+2. Are there any use cases not covered by the current reference - for example, you'd like to perform a full sync periodically and return full data for *all applications* with one endpoint?
+3. Can we improve the format of the data returned (or the format of the endpoints and parameters themselves)?
 
 ### List applications
 
-3. Are there any other core fields that would be useful in the **List applications** endpoint, for example status or broker company name?
+4. Are there any other core fields that would be useful in the **List applications** endpoint, for example status or broker company name?
 
 ### Fetch application data
 
-4. Should we make it possible to retrieve members of the broker's team, as part of the **Fetch application data** endpoint or a new endpoint?
-5. For `tag`, should we also return the color indicated for the tag?
-6. `nextDocumentDueDate` indicates the next date that a document is due. We could also look for the next date that a yearly document is due, which would be a good indication of the yearly renewal date. (However, there may be documents with yearly renewals on different dates.)
-7. Are there any fields that aren't relevant or required, for example `assignedUsers` or `contractProcessors`?
-8. Are there any fields or data that may be needed in addition to what is specified - for example, the `role` of `assignedAccountExecutive` or `assignedUsers`?
-9. Instead of passing all fields by default, should we allow parameters to be passed to the API endpoint to specify which fields should be returned?
+5. Should we make it possible to retrieve members of the broker's team, as part of the **Fetch application data** endpoint or a new endpoint?
+6. For `tag`, should we also return the color indicated for the tag?
+7. `nextDocumentDueDate` indicates the next date that a document is due. We could also look for the next date that a yearly document is due, which would be a good indication of the yearly renewal date. (However, there may be documents with yearly renewals on different dates.)
+8. Are there any fields that aren't relevant or required, for example `assignedUsers` or `contractProcessors`?
+9. Are there any fields or data that may be needed in addition to what is specified - for example, the `role` of `assignedAccountExecutive` or `assignedUsers`?
+10. Instead of passing all fields by default, should we allow parameters to be passed to the API endpoint to specify which fields should be returned?
