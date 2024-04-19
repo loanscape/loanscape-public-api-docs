@@ -22,7 +22,7 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "team@loanscape.io"
+      "url": "mailto:team@loanscape.io"
     }
   ],
   "topbarCtaButton": {
@@ -31,7 +31,7 @@
   },
   "navigation": [
     {
-      "group": "API Reference",
+      "group": "General",
       "pages": [
         "introduction",
         "authentication"
@@ -40,9 +40,14 @@
     {
       "group": "Endpoints",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/endpoint/list_applications",
+        "api-reference/endpoint/get_application"
+      ]
+    },
+    {
+      "group": "Misc",
+      "pages": [
+        "feedback"
       ]
     },
     {
