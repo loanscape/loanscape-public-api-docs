@@ -59,8 +59,7 @@
             "description": "The _id of the application to fetch.",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
