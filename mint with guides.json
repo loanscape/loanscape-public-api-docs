@@ -1,14 +1,14 @@
 {
   "group": "Mintly Guides",
   "pages": [
-    "mintly_guides/introduction",
-    "mintly_guides/quickstart",
-    "mintly_guides/development",
-    "mintly_guides/markdown",
-    "mintly_guides/code",
-    "mintly_guides/images",
-    "mintly_guides/settings",
-    "mintly_guides/navigation",
-    "mintly_guides/reusable-snippets"
+    "pages/mintly_guides/introduction",
+    "pages/mintly_guides/quickstart",
+    "pages/mintly_guides/development",
+    "pages/mintly_guides/markdown",
+    "pages/mintly_guides/code",
+    "pages/mintly_guides/images",
+    "pages/mintly_guides/settings",
+    "pages/mintly_guides/navigation",
+    "pages/mintly_guides/reusable-snippets"
   ]
 }
