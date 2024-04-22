@@ -21,7 +21,19 @@
   "paths": {
     "/applications": {
       "get": {
-        "description": "Returns a list of applications with basic data for each application.",
+        "description": "Retrieve a list of applications with basic data for each application.<Info>By default, only `_id` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`. The example response to the right shows all of the available options.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1?fields=status,tag,channels,assignedAccountExecutive,dateCreated,dateApproved,dateStatusUpdated,renewalDate,broker.name,broker.nmls,broker.pointOfContact`</Info>",
+        "parameters": [
+          {
+              "name": "fields",
+              "in": "query",
+              "description": "Additional fields to fetch. Separate multiple fields with commas. (optional)",
+              "required": false,
+              "schema": {
+                "type": "string"
+              },
+              "style": "form"
+          }
+        ],
         "responses": {
           "200": {
             "description": "List of applications returned",
@@ -51,7 +63,7 @@
     },
     "/applications/{_id}": {
       "get": {
-        "description": "Returns full data for a given application.",
+        "description": "Retrieve full data for a given application.<Info>By default, only `_id` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`. The example response to the right shows all of the available options.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,dateCreated,dateApproved,dateStatusUpdated,renewalDate,broker.name,broker.nmls,broker.address,broker.ein,broker.pointOfContact,broker.team,broker.dbas,broker.companyTypes,broker.operatingStates,broker.suretyBonds,broker.eoInsurance,broker.affiliations,broker.industryApprovals,broker.branches,broker.contractProcessors`</Info>",
         "parameters": [
           {
             "name": "_id",
@@ -61,7 +73,17 @@
             "schema": {
               "type": "string"
             }
-          }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Additional fields to fetch. Separate multiple fields with commas. (optional)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+        }
         ],
         "responses": {
           "200": {
@@ -97,9 +119,64 @@
             "description": "The application ID.",
             "type": "string"
           },
+          "status": {
+            "description": "The status of the application.",
+            "type": "string"
+          },
+          "tag": { 
+            "description": "The tag assigned by the lender's team.",
+            "type": "string"
+          },
+          "channels": {
+            "description": "The channels associated with the application.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "assignedAccountExecutive": {
+            "description": "Details of the assigned account executive on the lender's team.",
+            "type": "object",
+            "properties": {
+              "_id": { "type": "string" },
+              "name": { "type": "string" },
+              "email": { "type": "string" },
+              "phone": { "type": "string" }
+            }
+          },
           "dateCreated": { 
             "description": "The date that the application was created. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
             "type": "string" 
+          },
+          "dateApproved": { 
+            "description": "The date that the application was approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "type": "string" 
+          },
+          "dateStatusUpdated": { 
+            "description": "The date that the application's status was last updated (for example, approved or renewed). This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "type": "string" 
+          },
+          "renewalDate": {
+            "description": "The date that the next yearly document becomes due from the broker.", 
+            "type": "string" 
+          },
+          "broker": {
+            "type": "object",
+            "description": "Details of the broker's company.",
+            "properties": {
+              "name": { "type": "string" },
+              "nmls": { "type": "string" },
+              "pointOfContact": {
+                "type": "object",
+                "description": "The point of contact indicated on the broker's company.",
+                "properties": {
+                  "_id": { "type": "string" },
+                  "name": { "type": "string" },
+                  "email": { "type": "string" },
+                  "phone": { "type": "string" }
+                }
+              }
+            }
           }
         }
       },
@@ -114,13 +191,9 @@
             "description": "The status of the application.",
             "type": "string"
           },
-          "dateCreated": { 
-            "description": "The date that the application was created. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
-            "type": "string" 
-          },
-          "dateStatusUpdated": { 
-            "description": "The date that the application's status was last updated (for example, approved or renewed). This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
-            "type": "string" 
+          "tag": { 
+            "description": "The tag assigned by the lender's team.",
+            "type": "string"
           },
           "channels": {
             "description": "The channels associated with the application.",
@@ -152,12 +225,20 @@
               }
             }
           },
-          "tag": { 
-            "description": "The tag assigned by the lender's team.",
-            "type": "string"
+          "dateCreated": { 
+            "description": "The date that the application was created. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "type": "string" 
           },
-          "nextDocumentDueDate": {
-            "description": "The date that the next document becomes due from the broker.", 
+          "dateApproved": { 
+            "description": "The date that the application was approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "type": "string" 
+          },
+          "dateStatusUpdated": { 
+            "description": "The date that the application's status was last updated (for example, approved or renewed). This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "type": "string" 
+          },
+          "renewalDate": {
+            "description": "The date that the next yearly document becomes due from the broker.", 
             "type": "string" 
           },
           "broker": {
@@ -181,9 +262,23 @@
                 "type": "object",
                 "description": "The point of contact indicated on the broker's company.",
                 "properties": {
+                  "_id": { "type": "string" },
                   "name": { "type": "string" },
                   "email": { "type": "string" },
                   "phone": { "type": "string" }
+                }
+              },
+              "team": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "phone": { "type": "string" },
+                    "role": { "type": "string" }
+                  }
                 }
               },
               "dbas": {
@@ -232,7 +327,7 @@
                   "properties": {
                     "company": { "type": "string" },
                     "amount": { 
-                      "description": "Amount is a number (e.g. 500) and indicates US dollars.",
+                      "description": "E&O insurance covering the broker. Amount is a number (e.g. 500) and indicates US dollars.",
                       "type": "number" 
                     },
                     "states": {
