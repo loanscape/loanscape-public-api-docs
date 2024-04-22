@@ -48,8 +48,7 @@
       "group": "Webhooks",
       "pages": [
         "pages/webhook-setup",
-        "api-reference/endpoint/list_applications",
-        "api-reference/endpoint/get_application"
+        "pages/webhook-events"
       ]
     },
     {
