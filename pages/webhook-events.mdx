@@ -4,10 +4,10 @@ title: 'Events'
 
 When an application is created or updated, POST requests will be sent to your Webhook URL with a JSON payload of the following format.
 
-You will only be notified of changes to fields which are returned in the **Fetch application data** endpoint.
+You will only be notified of changes to fields which are returned in the [Fetch application data](/api-reference/endpoint/get_application) endpoint.
 
 <Info>
-  If a broker updates their company profile, their changes will be grouped into a single webhook event sent at the end of the day.
+  If a broker updates their company profile, their changes will be grouped into a single webhook event sent at the end of the day. Updates to team members will be sent instantly.
 </Info>
 
 ### Body Parameters
@@ -34,5 +34,10 @@ You will only be notified of changes to fields which are returned in the **Fetch
   "content-type": "application/json; charset=utf-8",
   "webhook-secret": "KNNR40RB4AOGNmyKaxGTeYlYdnPlMBd"
 ```
-
 </CodeGroup>
+
+<br/>
+
+<Tip>
+  You can use the **Send test event** button to send a POST request to test the process. The `applicationId` will refer to a random application that you have, or will be blank if you have no applications.
+</Tip>
