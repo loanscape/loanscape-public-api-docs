@@ -21,7 +21,7 @@
   "paths": {
     "/applications": {
       "get": {
-        "description": "Returns a list of all application IDs.",
+        "description": "Returns a list of all application identifiers.",
         "parameters": [
           {
             "name": "limit",

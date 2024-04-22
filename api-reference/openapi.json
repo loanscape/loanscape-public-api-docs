@@ -21,7 +21,7 @@
   "paths": {
     "/applications": {
       "get": {
-        "description": "Retrieve a list of applications with basic data for each application.<Info>By default, only `_id` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`. The example response to the right shows all of the available options.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1?fields=status,tag,channels,assignedAccountExecutive,dateCreated,dateApproved,dateStatusUpdated,renewalDate,broker.name,broker.nmls,broker.pointOfContact`</Info>",
+        "description": "Retrieve a list of applications with basic data for each application.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1?fields=status,tag,channels,assignedAccountExecutive,dateCreated,dateApproved,dateStatusUpdated,renewalDate,broker.companyId,broker.name,broker.nmls,broker.pointOfContact`</Info>",
         "parameters": [
           {
               "name": "fields",
@@ -61,14 +61,14 @@
         }
       }
     },
-    "/applications/{_id}": {
+    "/applications/{applicationId}": {
       "get": {
-        "description": "Retrieve full data for a given application.<Info>By default, only `_id` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`. The example response to the right shows all of the available options.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,dateCreated,dateApproved,dateStatusUpdated,renewalDate,broker.name,broker.nmls,broker.address,broker.ein,broker.pointOfContact,broker.team,broker.dbas,broker.companyTypes,broker.operatingStates,broker.suretyBonds,broker.eoInsurance,broker.affiliations,broker.industryApprovals,broker.branches,broker.contractProcessors`</Info>",
+        "description": "Retrieve full data for a given application.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,dateCreated,dateApproved,dateStatusUpdated,renewalDate,broker.companyId,broker.name,broker.nmls,broker.address,broker.ein,broker.pointOfContact,broker.team,broker.dbas,broker.companyTypes,broker.operatingStates,broker.suretyBonds,broker.eoInsurance,broker.affiliations,broker.industryApprovals,broker.branches,broker.contractProcessors`</Info>",
         "parameters": [
           {
-            "name": "_id",
+            "name": "applicationId",
             "in": "path",
-            "description": "The _id of the application to fetch.",
+            "description": "The applicationId of the application to fetch.",
             "required": true,
             "schema": {
               "type": "string"
@@ -115,8 +115,8 @@
       "LightApplication": {
         "type": "object",
         "properties": {
-          "_id": {
-            "description": "The application ID.",
+          "applicationId": {
+            "description": "The application's unique identifier.",
             "type": "string"
           },
           "status": {
@@ -138,7 +138,7 @@
             "description": "Details of the assigned account executive on the lender's team.",
             "type": "object",
             "properties": {
-              "_id": { "type": "string" },
+              "userId": { "type": "string" },
               "name": { "type": "string" },
               "email": { "type": "string" },
               "phone": { "type": "string" }
@@ -164,13 +164,14 @@
             "type": "object",
             "description": "Details of the broker's company.",
             "properties": {
+              "companyId": { "type": "string" },
               "name": { "type": "string" },
               "nmls": { "type": "string" },
               "pointOfContact": {
                 "type": "object",
                 "description": "The point of contact indicated on the broker's company.",
                 "properties": {
-                  "_id": { "type": "string" },
+                  "userId": { "type": "string" },
                   "name": { "type": "string" },
                   "email": { "type": "string" },
                   "phone": { "type": "string" }
@@ -183,8 +184,8 @@
       "FullApplication": {
         "type": "object",
         "properties": {
-          "_id": {
-            "description": "The application ID.",
+          "applicationId": {
+            "description": "The application's unique identifier.",
             "type": "string"
           },
           "status": {
@@ -206,7 +207,7 @@
             "description": "Details of the assigned account executive on the lender's team.",
             "type": "object",
             "properties": {
-              "_id": { "type": "string" },
+              "userId": { "type": "string" },
               "name": { "type": "string" },
               "email": { "type": "string" },
               "phone": { "type": "string" }
@@ -218,7 +219,7 @@
             "items": {
               "type": "object",
               "properties": {
-                "_id": { "type": "string" },
+                "userId": { "type": "string" },
                 "name": { "type": "string" },
                 "email": { "type": "string" },
                 "phone": { "type": "string" }
@@ -245,6 +246,7 @@
             "type": "object",
             "description": "Details of the broker's company.",
             "properties": {
+              "companyId": { "type": "string" },
               "name": { "type": "string" },
               "nmls": { "type": "string" },
               "address": {
@@ -262,7 +264,7 @@
                 "type": "object",
                 "description": "The point of contact indicated on the broker's company.",
                 "properties": {
-                  "_id": { "type": "string" },
+                  "userId": { "type": "string" },
                   "name": { "type": "string" },
                   "email": { "type": "string" },
                   "phone": { "type": "string" }
@@ -273,7 +275,7 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "_id": { "type": "string" },
+                    "userId": { "type": "string" },
                     "name": { "type": "string" },
                     "email": { "type": "string" },
                     "phone": { "type": "string" },
