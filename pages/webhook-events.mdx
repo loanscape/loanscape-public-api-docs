@@ -1,0 +1,38 @@
+---
+title: 'Events'
+---
+
+When an application is created or updated, POST requests will be sent to your Webhook URL with a JSON payload of the following format.
+
+You will only be notified of changes to fields which are returned in the **Fetch application data** endpoint.
+
+<Info>
+  If a broker updates their company profile, their changes will be grouped into a single webhook event sent at the end of the day.
+</Info>
+
+### Body Parameters
+
+|Key|Type|Description|
+|----------|----------|----------|
+|`applicationId`|string|The ID of the created or updated application.|
+|`event`|string|`application_created` or `application_updated`|
+|`fieldsUpdated`|array of strings|A list indicating which fields have been updated. Only passed when event is `application_updated`.|
+
+### Example
+
+<CodeGroup>
+```json JSON
+{
+  "applicationId": "65f8ab19bbdaba667c42f6f2",
+  "event": "application_updated",
+  "fieldsUpdated": ["status", "assignedAccountExecutive", "broker.address", "broker.dbas"]
+}
+```
+
+```json Headers
+{
+  "content-type": "application/json; charset=utf-8",
+  "webhook-secret": "KNNR40RB4AOGNmyKaxGTeYlYdnPlMBd"
+```
+
+</CodeGroup>
