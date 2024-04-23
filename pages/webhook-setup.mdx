@@ -8,8 +8,10 @@ You can set up webhooks in the [Developers section of your settings screen](http
 
 **Webhook URL**: this is the URL that we will send POST requests to when an application is created or updated.
 
-**Webhook secret (optional)**: This will be passed in the `webhook-secret` header of the POST requests. When processing requests from Loanscape, you should verify that the value matches. This verifies that the webhook is really being sent by Loanscape.
+**Webhook secret (optional)**: this will be passed in the `webhook-secret` header of the POST requests. When processing requests from Loanscape, you should verify that the value matches. This verifies that the webhook is really being sent by Loanscape.
 
 <Info>
   The webhook secret is unrelated to your API token - these can (and should) be different values.
 </Info>
+
+**Webhook triggers**: choose which events should trigger webhooks, and which fields should trigger the `application_updated` event. You can uncheck fields that aren't important to you (for example, `broker.suretyBonds`). This means updates to this field won't trigger a webhook or be mentioned in `fieldsUpdated`.
