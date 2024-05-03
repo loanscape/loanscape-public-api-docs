@@ -15,7 +15,7 @@
   ],
   "security": [
     {
-      "bearerAuth": []
+      "apiKeyAuth": []
     }
   ],
   "paths": {
@@ -63,7 +63,7 @@
     },
     "/applications/{applicationId}": {
       "get": {
-        "description": "Retrieve full data for a given application.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/65b0dc2d39f534a12534c96e?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,dateCreated,dateApproved,dateStatusUpdated,renewalDate,broker.companyId,broker.name,broker.nmls,broker.address,broker.ein,broker.pointOfContact,broker.team,broker.dbas,broker.companyTypes,broker.operatingStates,broker.suretyBonds,broker.eoInsurance,broker.affiliations,broker.industryApprovals,broker.branches,broker.contractProcessors`</Info>",
+        "description": "Retrieve full data for a given application.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,dateCreated,dateApproved,dateStatusUpdated,renewalDate,broker.companyId,broker.name,broker.nmls,broker.address,broker.ein,broker.pointOfContact,broker.team,broker.dbas,broker.companyTypes,broker.operatingStates,broker.suretyBonds,broker.eoInsurance,broker.affiliations,broker.industryApprovals,broker.branches,broker.contractProcessors`</Info>",
         "parameters": [
           {
             "name": "applicationId",
@@ -443,9 +443,10 @@
       }
     },
     "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
       }
     }
   }
