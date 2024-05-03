@@ -153,11 +153,11 @@
             "type": "string" 
           },
           "dateApproved": { 
-            "description": "The date that the application was approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "description": "The date that the application was first approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
             "type": "string" 
           },
           "dateStatusUpdated": { 
-            "description": "The date that the application's status was last updated (for example, approved or renewed). This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "description": "The date that the application's status was last updated (for example, renewed or deactivated). This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
             "type": "string" 
           },
           "broker": {
@@ -235,11 +235,11 @@
             "type": "string" 
           },
           "dateApproved": { 
-            "description": "The date that the application was approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "description": "The date that the application was first approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
             "type": "string" 
           },
           "dateStatusUpdated": { 
-            "description": "The date that the application's status was last updated (for example, approved or renewed). This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "description": "The date that the application's status was last updated (for example, renewed or deactivated). This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
             "type": "string" 
           },
           "broker": {
