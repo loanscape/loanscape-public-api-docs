@@ -40,8 +40,8 @@
       "group": "API Endpoints",
       "pages": [
         "pages/authentication",
-        "api-reference/endpoint/list_applications",
-        "api-reference/endpoint/get_application"
+        "api-reference/endpoint/fetch_applications",
+        "api-reference/endpoint/fetch_application"
       ]
     },
     {
