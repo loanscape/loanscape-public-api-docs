@@ -21,7 +21,7 @@
   "paths": {
     "/applications": {
       "get": {
-        "description": "Retrieve a list of applications with basic data for each application.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,nextRenewalDate,dateCreated,dateApproved,dateStatusUpdated,broker.companyId,broker.name,broker.nmls,broker.pointOfContact`</Info>",
+        "description": "Retrieve a list of applications with basic data for each application.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,broker.companyId,broker.name,broker.nmls,broker.pointOfContact`</Info>",
         "parameters": [
           {
               "name": "fields",
@@ -63,7 +63,7 @@
     },
     "/applications/{applicationId}": {
       "get": {
-        "description": "Retrieve full data for a given application.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateStatusUpdated,broker.companyId,broker.name,broker.nmls,broker.address,broker.ein,broker.pointOfContact,broker.team,broker.dbas,broker.companyTypes,broker.operatingStates,broker.suretyBonds,broker.eoInsurance,broker.affiliations,broker.industryApprovals,broker.branches,broker.contractProcessors`</Info>",
+        "description": "Retrieve full data for a given application.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,broker.companyId,broker.name,broker.nmls,broker.address,broker.ein,broker.pointOfContact,broker.team,broker.dbas,broker.companyTypes,broker.operatingStates,broker.suretyBonds,broker.eoInsurance,broker.affiliations,broker.industryApprovals,broker.branches,broker.contractProcessors`</Info>",
         "parameters": [
           {
             "name": "applicationId",
@@ -156,6 +156,10 @@
             "description": "The date that the application was first approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
             "type": "string" 
           },
+          "dateRenewed": { 
+            "description": "The date that the application was first approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "type": "string" 
+          },
           "dateStatusUpdated": { 
             "description": "The date that the application's status was last updated (for example, renewed or deactivated). This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
             "type": "string" 
@@ -235,6 +239,10 @@
             "type": "string" 
           },
           "dateApproved": { 
+            "description": "The date that the application was first approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "type": "string" 
+          },
+          "dateRenewed": { 
             "description": "The date that the application was first approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
             "type": "string" 
           },
