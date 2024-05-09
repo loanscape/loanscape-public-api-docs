@@ -7,7 +7,7 @@ When an application is created or updated, POST requests will be sent to your We
 You will only be notified of events and updates to fields which are enabled in the **Webhook triggers** section of the [API/Webooks section of your settings screen](https://app.loanscape.io/dashboard/settings/developers).
 
 {/* <Info>
-  If a broker updates their company profile, their changes will be grouped into a single webhook event sent at the end of the day. Updates to team members will be sent instantly.
+  If a TPO updates their company profile, their changes will be grouped into a single webhook event sent at the end of the day. Updates to team members will be sent instantly.
 </Info> */}
 
 ### Body Parameters
@@ -25,7 +25,7 @@ You will only be notified of events and updates to fields which are enabled in t
 {
   "applicationId": "65f8ab19bbdaba667c42f6f2",
   "event": "application_updated",
-  "fieldsUpdated": ["status", "assignedAccountExecutive", "broker.address", "broker.dbas"]
+  "fieldsUpdated": ["status", "assignedAccountExecutive", "tpo.address", "tpo.dbas"]
 }
 ```
 

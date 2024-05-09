@@ -21,7 +21,7 @@
   "paths": {
     "/applications": {
       "get": {
-        "description": "Fetch all applications made to your company, specifying the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,broker.companyId,broker.name,broker.nmls,broker.address,broker.ein,broker.pointOfContact,broker.team,broker.dbas,broker.companyTypes,broker.operatingStates,broker.suretyBonds,broker.eoInsurance,broker.affiliations,broker.industryApprovals,broker.branches,broker.contractProcessors`</Info>",
+        "description": "Fetch all applications made to your company, specifying the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.ein,tpo.pointOfContact,tpo.team,tpo.dbas,tpo.companyTypes,tpo.operatingStates,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.branches,tpo.contractProcessors`</Info>",
         "parameters": [
           {
               "name": "fields",
@@ -63,7 +63,7 @@
     },
     "/applications/{applicationId}": {
       "get": {
-        "description": "Fetch a specific application, specifying the `applicationId` and the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the broker object should be specifically requested with the format `broker.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,broker.companyId,broker.name,broker.nmls,broker.address,broker.ein,broker.pointOfContact,broker.team,broker.dbas,broker.companyTypes,broker.operatingStates,broker.suretyBonds,broker.eoInsurance,broker.affiliations,broker.industryApprovals,broker.branches,broker.contractProcessors`</Info>",
+        "description": "Fetch a specific application, specifying the `applicationId` and the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.ein,tpo.pointOfContact,tpo.team,tpo.dbas,tpo.companyTypes,tpo.operatingStates,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.branches,tpo.contractProcessors`</Info>",
         "parameters": [
           {
             "name": "applicationId",
@@ -145,7 +145,7 @@
             }
           },
           "nextRenewalDate": {
-            "description": "The date that the next yearly document is due from the broker.", 
+            "description": "The date that the next yearly document is due from the TPO.", 
             "type": "string" 
           },
           "dateCreated": { 
@@ -164,16 +164,16 @@
             "description": "The date that the application's status was last updated (for example, renewed or deactivated). This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
             "type": "string" 
           },
-          "broker": {
+          "tpo": {
             "type": "object",
-            "description": "Details of the broker's company.",
+            "description": "Details of the TPO's company.",
             "properties": {
               "companyId": { "type": "string" },
               "name": { "type": "string" },
               "nmls": { "type": "string" },
               "pointOfContact": {
                 "type": "object",
-                "description": "The point of contact indicated on the broker's company.",
+                "description": "The point of contact indicated on the TPO's company.",
                 "properties": {
                   "userId": { "type": "string" },
                   "name": { "type": "string" },
@@ -231,7 +231,7 @@
             }
           },
           "nextRenewalDate": {
-            "description": "The date that the next yearly document is due from the broker.", 
+            "description": "The date that the next yearly document is due from the TPO.", 
             "type": "string" 
           },
           "dateCreated": { 
@@ -250,9 +250,9 @@
             "description": "The date that the application's status was last updated (for example, renewed or deactivated). This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
             "type": "string" 
           },
-          "broker": {
+          "tpo": {
             "type": "object",
-            "description": "Details of the broker's company.",
+            "description": "Details of the TPO's company.",
             "properties": {
               "companyId": { "type": "string" },
               "name": { "type": "string" },
@@ -270,7 +270,7 @@
               "ein": { "type": "string" },
               "pointOfContact": {
                 "type": "object",
-                "description": "The point of contact indicated on the broker's company.",
+                "description": "The point of contact indicated on the TPO's company.",
                 "properties": {
                   "userId": { "type": "string" },
                   "name": { "type": "string" },
@@ -337,7 +337,7 @@
                   "properties": {
                     "company": { "type": "string" },
                     "amount": { 
-                      "description": "E&O insurance covering the broker. Amount is a number (e.g. 500) and indicates US dollars.",
+                      "description": "E&O insurance covering the TPO. Amount is a number (e.g. 500) and indicates US dollars.",
                       "type": "number" 
                     },
                     "states": {
