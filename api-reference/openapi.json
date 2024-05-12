@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://app.loanscape.io/api/v1.0"
+      "url": "https://loanscape-staging-c50e6f52a6cb.herokuapp.com/api/v1.0"
     }
   ],
   "security": [
