@@ -48,7 +48,8 @@
       "group": "Webhooks",
       "pages": [
         "pages/webhook-setup",
-        "pages/webhook-events"
+        "pages/webhook-events",
+        "pages/webhook-testing"
       ]
     },
     {
