@@ -8,7 +8,7 @@ You can set up webhooks in the [API/Webooks section of your settings screen](htt
 
 **Webhook URL**: this is the URL that we will send POST requests to when an application is created or updated.
 
-**Webhook secret (optional)**: this will be passed in the `webhook-secret` header of the POST requests. When processing requests from Loanscape, you should verify that the value matches. This verifies that the webhook is really being sent by Loanscape.
+**Webhook secret (optional)**: this will be passed in the `WEBHOOK-SECRET` header of the POST requests. When processing requests from Loanscape, you should verify that the value matches. This verifies that the webhook is really being sent by Loanscape.
 
 <Info>
   The webhook secret is unrelated to your API token - these can (and should) be different values.
