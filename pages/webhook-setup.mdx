@@ -2,7 +2,7 @@
 title: 'Setup'
 ---
 
-Webhooks are POST requests we send to an URL that you specify, to notify you of new or updated applications. After your server receives a webhook event, you can pass the `applicationId` to our [Fetch application data](/api-reference/endpoint/get_application) endpoint to fetch the latest data for that application.
+Webhooks are POST requests we send to an URL that you specify, to notify you of new or updated applications. After your server receives a webhook event, you can pass the `applicationId` to our [Fetch an aplication](/api-reference/endpoint/get_application) endpoint to fetch the latest data for that application.
 
 You can set up webhooks in the [API/Webhooks section of your settings screen](https://app.loanscape.io/dashboard/settings/developers) on Loanscape.
 
@@ -14,4 +14,4 @@ You can set up webhooks in the [API/Webhooks section of your settings screen](ht
   The webhook secret is unrelated to your API token - these can (and should) be different values.
 </Info>
 
-**Webhook events & fields to monitor**: choose which events should trigger webhooks, and which fields should trigger the `application_updated` event. You can uncheck fields that aren't important to you (for example, `tpo.suretyBonds`). This means updates to this field won't trigger a webhook or be mentioned in `fieldsUpdated`.
+**Webhook events & fields to monitor**: choose which events should trigger webhooks, and which fields should trigger the `application_updated` event. You can uncheck fields that aren't important to you - then, updates to this field won't trigger a webhook or be mentioned in `fieldsUpdated`.

@@ -120,7 +120,7 @@
             "type": "string"
           },
           "status": {
-            "description": "The status of the application.",
+            "description": "The status of the application: pending, approved, pending_renewal, deactivated, denied or withdrawn.",
             "type": "string"
           },
           "tag": { 
@@ -193,7 +193,7 @@
             "type": "string"
           },
           "status": {
-            "description": "The status of the application.",
+            "description": "The status of the application: pending, approved, pending_renewal, deactivated, denied or withdrawn.",
             "type": "string"
           },
           "tag": { 

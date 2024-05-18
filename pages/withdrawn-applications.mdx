@@ -1,0 +1,9 @@
+---
+title: 'Withdrawn applications'
+---
+
+Applications with `pending` status can be withdrawn by the TPO - for example, if they make a mistake. Once an application has been approved, it cannot be withdrawn by the TPO (this includes applications with `pending_renewal` status - these cannot be withdrawn, only deactivated by the lender).
+
+Withdrawn applications will be returned by our [Fetch all applications](/api-reference/endpoint/get_applications) and [Fetch an applications](/api-reference/endpoint/get_application) endpoints, but with limited fields - only `applicationId`, `status` ("withdrawn"), `dateCreated` and `dateStatusUpdated`.
+
+You can listen for application withdrawals with our `application_updated` webhook. This will notify you that the `status` field has changed. When you fetch the application from our API, its status will be `withdrawn`. You can then delete the application from your records.
