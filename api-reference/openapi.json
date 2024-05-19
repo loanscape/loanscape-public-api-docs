@@ -112,79 +112,6 @@
   },
   "components": {
     "schemas": {
-      "LightApplicationDEPRECATED": {
-        "type": "object",
-        "properties": {
-          "applicationId": {
-            "description": "The application's unique identifier.",
-            "type": "string"
-          },
-          "status": {
-            "description": "The status of the application: pending, approved, pending_renewal, deactivated, denied or withdrawn.",
-            "type": "string"
-          },
-          "tag": { 
-            "description": "The tag assigned by the lender's team.",
-            "type": "string"
-          },
-          "channels": {
-            "description": "The channels associated with the application.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "assignedAccountExecutive": {
-            "description": "Details of the assigned account executive on the lender's team.",
-            "type": "object",
-            "properties": {
-              "userId": { "type": "string" },
-              "name": { "type": "string" },
-              "email": { "type": "string" },
-              "phone": { "type": "string" }
-            }
-          },
-          "nextRenewalDate": {
-            "description": "The date that the next yearly document is due from the TPO. Only available for applications with status \"approved\" or \"pending_renewal\"",
-            "type": "string" 
-          },
-          "dateCreated": { 
-            "description": "The date that the application was created. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
-            "type": "string" 
-          },
-          "dateApproved": { 
-            "description": "The date that the application was first approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
-            "type": "string" 
-          },
-          "dateRenewed": { 
-            "description": "The date that the application was first approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
-            "type": "string" 
-          },
-          "dateStatusUpdated": { 
-            "description": "The date that the application's status was last updated (for example, renewed or deactivated). This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
-            "type": "string" 
-          },
-          "tpo": {
-            "type": "object",
-            "description": "Details of the TPO's company.",
-            "properties": {
-              "companyId": { "type": "string" },
-              "name": { "type": "string" },
-              "nmls": { "type": "string" },
-              "pointOfContact": {
-                "type": "object",
-                "description": "The point of contact indicated on the TPO's company.",
-                "properties": {
-                  "userId": { "type": "string" },
-                  "name": { "type": "string" },
-                  "email": { "type": "string" },
-                  "phone": { "type": "string" }
-                }
-              }
-            }
-          }
-        }
-      },
       "FullApplication": {
         "type": "object",
         "properties": {
@@ -231,7 +158,7 @@
             }
           },
           "nextRenewalDate": {
-            "description": "The date that the next yearly document is due from the TPO. Only available for applications with status \"approved\" or \"pending_renewal\"",
+            "description": "The date that the next yearly document is due from the TPO. Only available for applications with status \"approved\" or \"pending_renewal\".",
             "type": "string" 
           },
           "dateCreated": { 
