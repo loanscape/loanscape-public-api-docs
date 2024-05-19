@@ -145,7 +145,7 @@
             }
           },
           "nextRenewalDate": {
-            "description": "The date that the next yearly document is due from the TPO.", 
+            "description": "The date that the next yearly document is due from the TPO. Only available for applications with status \"approved\" or \"pending_renewal\"",
             "type": "string" 
           },
           "dateCreated": { 
@@ -231,7 +231,7 @@
             }
           },
           "nextRenewalDate": {
-            "description": "The date that the next yearly document is due from the TPO.", 
+            "description": "The date that the next yearly document is due from the TPO. Only available for applications with status \"approved\" or \"pending_renewal\"",
             "type": "string" 
           },
           "dateCreated": { 
