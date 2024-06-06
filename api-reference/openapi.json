@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://api.loanscape.io/api/v1.0"
+      "url": "https://app.loanscape.io/api/v1.0"
     }
   ],
   "security": [
