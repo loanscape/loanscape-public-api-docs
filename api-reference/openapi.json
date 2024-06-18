@@ -128,10 +128,17 @@
             "type": "string"
           },
           "channels": {
-            "description": "The channels associated with the application.",
+            "description": "The status and details of each channels associated with the application.",
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "object",
+              "properties": {
+                "title": { "type": "string", "description": "E.g. `Non-Del Correspondent`, `Warehouse`, etc." },
+                "status": { "type": "string", "description":  "The status of the application: `pending`, `approved`, `deactivated` or `denied`." },
+                "dateApplied": { "type": "string" },
+                "dateStatusUpdated": { "type": "string" },
+                "yearlyRenewalDate": { "type": "string" }
+              }
             }
           },
           "assignedAccountExecutive": {
