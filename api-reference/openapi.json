@@ -134,7 +134,7 @@
               "type": "object",
               "properties": {
                 "title": { "type": "string", "description": "E.g. `Non-Del Correspondent`, `Warehouse`, etc." },
-                "status": { "type": "string", "description":  "The status of the application: `pending`, `approved`, `deactivated` or `denied`." },
+                "status": { "type": "string", "description":  "The status of the channel: `pending`, `approved`, `deactivated` or `denied`." },
                 "dateApplied": { "type": "string", "description":  "The date that the channel was added or restored to pending status." },
                 "dateApproved": { "type": "string" },
                 "dateStatusUpdated": { "type": "string" },
