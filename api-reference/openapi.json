@@ -120,7 +120,7 @@
             "type": "string"
           },
           "status": {
-            "description": "The status of the application: `pending`, `approved`, `pending_renewal`, `deactivated`, `denied` or `withdrawn`.",
+            "description": "The status of the application: `pending`, `active`, `pending_renewal`, `deactivated`, `denied` or `withdrawn`.",
             "type": "string"
           },
           "tag": { 
@@ -166,7 +166,7 @@
             }
           },
           "nextRenewalDate": {
-            "description": "The date that the next yearly document is due from the TPO. Only available for applications with status \"approved\" or \"pending_renewal\".",
+            "description": "The date that the next yearly document is due from the TPO. Only available for applications with status \"active\" or \"pending_renewal\".",
             "type": "string" 
           },
           "dateCreated": { 
