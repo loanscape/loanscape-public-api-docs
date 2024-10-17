@@ -136,7 +136,8 @@
                 "title": { "type": "string", "description": "E.g. `Non-Del Correspondent`, `Warehouse`, etc." },
                 "status": { "type": "string", "description":  "The status of the channel: `pending`, `approved`, `deactivated` or `denied`." },
                 "dateApplied": { "type": "string", "description":  "The date that the channel was added or restored to pending status." },
-                "dateApproved": { "type": "string" },
+                "dateApproved": { "type": "string", "description": "The date that this channel was initially approved. (On the Loanscape website, within the \"Channels\" section of an application, the date shown under the \"Date Approved\" column will be either dateApproved or dateRenewed, whichever is latest. In the API, this is strictly the date of initial approval.)" },
+                "dateRenewed": { "type": "string", "description":  "The date that the application was last renewed, with this channel selected as part of the renewal." },
                 "dateStatusUpdated": { "type": "string" },
                 "yearlyRenewalDate": { "type": "string" }
               }
@@ -174,7 +175,7 @@
             "type": "string" 
           },
           "dateApproved": { 
-            "description": "The date that the application was first approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "description": "The date that the application was first approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z). (On the Loanscape website, the date shown under the \"Date Approved\" column will be either dateApproved or dateRenewed, whichever is latest. In the API, this is strictly the date of initial approval.)",
             "type": "string" 
           },
           "dateRenewed": { 
