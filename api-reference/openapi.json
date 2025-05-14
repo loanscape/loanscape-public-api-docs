@@ -224,7 +224,10 @@
                     "name": { "type": "string" },
                     "email": { "type": "string" },
                     "phone": { "type": "string" },
-                    "role": { "type": "string" }
+                    "roles": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
                   }
                 }
               },
