@@ -34,6 +34,7 @@
       "group": "General",
       "pages": [
         "pages/introduction",
+        "pages/changelog",
         "pages/withdrawn-applications"
       ]
     },

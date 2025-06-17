@@ -1,0 +1,26 @@
+---
+title: 'Changelog'
+---
+
+###  June 2025 
+
+We're adding detailed licensing information to `tpo.branches`, including `stateLicenses` and `tradeNames`, synced with NMLS.
+
+We're adding some fields to the `tpo` object within applications:
+- `tpo.businessStructure`
+- `tpo.stockSymbol`
+- `tpo.ncua`
+- `tpo.fdic`
+- `tpo.stateLicenses` (this is an array of objects representing active company licenses, synced with NMLS)
+
+We're removing `ncua` and `fdic` from `tpo.industryApprovals` as they can now be found above. We're adding `ginnieMae` to `tpo.industryApprovals`.
+
+Users within `tpo.team` now have an `isAuthorizedSigner` field.
+
+We're renaming a couple fields:
+- `tpo.operatingStates` -> `tpo.licensedStates`
+- `tpo.dbas` -> `tpo.tradeNames`
+
+<Tip>
+  Tip: we don't recommend using the `Fetch all applications` endpoint with many complex fields. This can cause errors as a result of trying to fetch too much data at once. You can fetch complex, detailed data using the `Fetch an application` endpoint for a single application.
+</Tip>

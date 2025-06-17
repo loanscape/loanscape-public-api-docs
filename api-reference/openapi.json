@@ -21,7 +21,7 @@
   "paths": {
     "/applications": {
       "get": {
-        "description": "Fetch all applications made to your company, specifying the fields you'd like to retrieve. Sorted by date created, oldest first.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.ein,tpo.pointOfContact,tpo.team,tpo.dbas,tpo.operatingStates,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.branches,tpo.contractProcessors`</Info>",
+        "description": "Fetch all applications connected to your company, specifying the fields you'd like to retrieve. Sorted by date created, oldest first.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.licensedStates,tpo.pointOfContact,tpo.team,tpo.tradeNames,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.contractProcessors,tpo.stateLicenses,tpo.branches`<br/><br/>If you receive an error trying to fetch all applications with many complex fields, you may be trying to fetch too much data at once - try again with simpler fields. You can fetch complex data using the `Fetch an application` endpoint for a single application.</Info>",
         "parameters": [
           {
               "name": "fields",
@@ -63,7 +63,7 @@
     },
     "/applications/{applicationId}": {
       "get": {
-        "description": "Fetch a specific application, specifying the `applicationId` and the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.ein,tpo.pointOfContact,tpo.team,tpo.dbas,tpo.operatingStates,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.branches,tpo.contractProcessors`</Info>",
+        "description": "Fetch a specific application, specifying the `applicationId` and the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.licensedStates,tpo.pointOfContact,tpo.team,tpo.tradeNames,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.contractProcessors,tpo.stateLicenses,tpo.branches`</Info>",
         "parameters": [
           {
             "name": "applicationId",
@@ -204,7 +204,15 @@
                 }
               },
               "phone": { "type": "string" },
-              "ein": { "type": "string" },
+              "businessStructure": { "type": "string", "description": "Options: llc, c-corp, s-corp, sole-proprietorship, lp, llp, general-partnership, partnership, lllp, trust, publicly-traded-corporation, bank, credit-union, non-profit-corporation." },
+              "ein": { "type": "string", "description": "(if applicable)" },
+              "stockSymbol": { "type": "string", "description": "(if applicable)" },
+              "ncua": { "type": "string", "description": "(if applicable)" },
+              "fdic": { "type": "string", "description": "(if applicable)" },
+              "licensedStates": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
               "pointOfContact": {
                 "type": "object",
                 "description": "The point of contact indicated on the TPO's company.",
@@ -227,11 +235,12 @@
                     "roles": {
                       "type": "array",
                       "items": { "type": "string" }
-                    }
+                    },
+                    "isAuthorizedSigner": { "type": "boolean" }
                   }
                 }
               },
-              "dbas": {
+              "tradeNames": {
                 "type": "array",
                 "items": {
                   "type": "object",
@@ -243,10 +252,6 @@
                     }
                   }
                 }
-              },
-              "operatingStates": {
-                "type": "array",
-                "items": { "type": "string" }
               },
               "suretyBonds": {
                 "type": "array",
@@ -317,30 +322,9 @@
                   "va": { "type": "string" },
                   "fannieMae": { "type": "string" },
                   "freddieMac": { "type": "string" },
+                  "ginnieMae": { "type": "string" },
                   "mers": { "type": "string" },
-                  "usda": { "type": "string" },
-                  "fdic": { "type": "string" },
-                  "ncua": { "type": "string" }
-                }
-              },
-              "branches": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "address": {
-                      "type": "object",
-                      "properties": {
-                        "line1": { "type": "string" },
-                        "line2": { "type": "string" },
-                        "city": { "type": "string" },
-                        "state": { "type": "string" },
-                        "zip": { "type": "string" }
-                      }
-                    },
-                    "nmls": { "type": "string" },
-                    "managerNmls": { "type": "string" }
-                  }
+                  "usda": { "type": "string" }
                 }
               },
               "contractProcessors": {
@@ -365,6 +349,84 @@
                     "pointOfContact": { 
                       "description": "The name of the point of contact.",
                       "type": "string"
+                    }
+                  }
+                }
+              },
+              "stateLicenses": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "licenseId": { "type": "string" },
+                    "licenseType": { "type": "string" },
+                    "licenseNumber": { "type": "string", "description": "(optional)" },
+                    "status": { "type": "string" },
+                    "regulator": { "type": "string" },
+                    "state": { "type": "string" },
+                    "issueDate": { "type": "string" },
+                    "statusDate": { "type": "string" }
+                  }
+                }
+              },
+              "branches": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "nmls": { "type": "string" },
+                    "address": {
+                      "type": "object",
+                      "properties": {
+                        "line1": { "type": "string" },
+                        "line2": { "type": "string" },
+                        "city": { "type": "string" },
+                        "state": { "type": "string" },
+                        "zip": { "type": "string" }
+                      }
+                    },
+                    "managers": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": { "type": "string" },
+                          "nmls": { "type": "string" }
+                        }
+                      }
+                    },
+                    "tradeNames": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": { "type": "string" },
+                          "states": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                          }
+                        }
+                      }
+                    },
+                    "licensedStates": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "stateLicenses": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "licenseId": { "type": "string" },
+                          "licenseType": { "type": "string" },
+                          "licenseNumber": { "type": "string" },
+                          "status": { "type": "string" },
+                          "regulator": { "type": "string" },
+                          "state": { "type": "string" },
+                          "issueDate": { "type": "string" },
+                          "statusDate": { "type": "string" }
+                        }
+                      }
                     }
                   }
                 }
