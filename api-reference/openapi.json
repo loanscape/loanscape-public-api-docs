@@ -211,6 +211,7 @@
               "fdic": { "type": "string", "description": "(if applicable)" },
               "licensedStates": {
                 "type": "array",
+                "description": "Synced with NMLS. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`)",
                 "items": { "type": "string" }
               },
               "pointOfContact": {
@@ -242,6 +243,7 @@
               },
               "tradeNames": {
                 "type": "array",
+                "description": "Synced with NMLS. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`)",
                 "items": {
                   "type": "object",
                   "properties": {
@@ -355,6 +357,7 @@
               },
               "stateLicenses": {
                 "type": "array",
+                "description": "Synced with NMLS. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`)",
                 "items": {
                   "type": "object",
                   "properties": {
@@ -371,6 +374,7 @@
               },
               "branches": {
                 "type": "array",
+                "description": "Synced with NMLS. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`)",
                 "items": {
                   "type": "object",
                   "properties": {
