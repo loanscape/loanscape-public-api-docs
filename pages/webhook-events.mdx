@@ -6,7 +6,7 @@ When an application is created or updated, POST requests will be sent to your We
 
 You will only be notified of events and updates to fields which are enabled in your [Webhook settings](https://app.loanscape.io/dashboard/settings/developers).
 
-If a TPO updates their company profile or team (e.g. `tpo.name`, `tpo.team`, `tpo.dbas` etc.) updates will be bundled into a single `application_updated` event sent within an hour.
+If a TPO updates their company profile or team (e.g. `tpo.name`, `tpo.team`, `tpo.affiliations` etc.) updates will be bundled into a single `application_updated` event sent within an hour.
 
 {/* <Info>
   If a TPO updates their company profile, their changes will be grouped into a single webhook event sent at the end of the day. Updates to team members will be sent instantly.
@@ -27,7 +27,7 @@ If a TPO updates their company profile or team (e.g. `tpo.name`, `tpo.team`, `tp
 {
   "applicationId": "65f8ab19bbdaba667c42f6f2",
   "event": "application_updated",
-  "fieldsUpdated": ["status", "assignedAccountExecutive", "tpo.address", "tpo.dbas"]
+  "fieldsUpdated": ["status", "assignedAccountExecutive", "tpo.address", "tpo.affiliations"]
 }
 ```
 
