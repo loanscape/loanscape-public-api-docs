@@ -5,6 +5,9 @@
     "default": "light",
     "isHidden": true
   },
+  "codeBlock": {
+    "mode": "dark"
+  },
   "logo": {
     "light": "/images/logo.png",
     "dark": "/images/logo.png"
