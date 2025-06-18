@@ -21,7 +21,7 @@
   "paths": {
     "/applications": {
       "get": {
-        "description": "Fetch all applications connected to your company, specifying the fields you'd like to retrieve. Sorted by date created, oldest first.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.licensedStates,tpo.pointOfContact,tpo.team,tpo.tradeNames,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.contractProcessors,tpo.stateLicenses,tpo.branches`<br/><br/>If you receive an error trying to fetch all applications with many complex fields, you may be trying to fetch too much data at once - try again with simpler fields. You can fetch complex data using the `Fetch an application` endpoint for a single application.</Info>",
+        "description": "Fetch all applications connected to your company, specifying the fields you'd like to retrieve. Sorted by date created, oldest first.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.licensedStates,tpo.pointOfContact,tpo.team,tpo.tradeNames,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.stateLicenses,tpo.branches`<br/><br/>If you receive an error trying to fetch all applications with many complex fields, you may be trying to fetch too much data at once - try again with simpler fields. You can fetch complex data using the `Fetch an application` endpoint for a single application.</Info>",
         "parameters": [
           {
               "name": "fields",
@@ -63,7 +63,7 @@
     },
     "/applications/{applicationId}": {
       "get": {
-        "description": "Fetch a specific application, specifying the `applicationId` and the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.licensedStates,tpo.pointOfContact,tpo.team,tpo.tradeNames,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.contractProcessors,tpo.stateLicenses,tpo.branches`</Info>",
+        "description": "Fetch a specific application, specifying the `applicationId` and the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.licensedStates,tpo.pointOfContact,tpo.team,tpo.tradeNames,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.stateLicenses,tpo.branches`</Info>",
         "parameters": [
           {
             "name": "applicationId",
@@ -327,32 +327,6 @@
                   "ginnieMae": { "type": "string" },
                   "mers": { "type": "string" },
                   "usda": { "type": "string" }
-                }
-              },
-              "contractProcessors": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "companyName": { "type": "string" },
-                    "companyNmls": { "type": "string" },
-                    "address": {
-                      "type": "object",
-                      "properties": {
-                        "line1": { "type": "string" },
-                        "line2": { "type": "string" },
-                        "city": { "type": "string" },
-                        "state": { "type": "string" },
-                        "zip": { "type": "string" }
-                      }
-                    },
-                    "phone": { "type": "string" },
-                    "email": { "type": "string" },
-                    "pointOfContact": { 
-                      "description": "The name of the point of contact.",
-                      "type": "string"
-                    }
-                  }
                 }
               },
               "stateLicenses": {
