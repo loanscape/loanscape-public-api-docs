@@ -21,7 +21,7 @@
   "paths": {
     "/applications": {
       "get": {
-        "description": "Fetch all applications connected to your company, specifying the fields you'd like to retrieve. Sorted by date created, oldest first.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.licensedStates,tpo.pointOfContact,tpo.team,tpo.tradeNames,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.stateLicenses,tpo.branches`<br/><br/>If you receive an error trying to fetch all applications with many complex fields, you may be trying to fetch too much data at once - try again with simpler fields. You can fetch complex data using the `Fetch an application` endpoint for a single application.</Info>",
+        "description": "Fetch all applications connected to your company, specifying the fields you'd like to retrieve. Sorted by date created, oldest first.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`<br/><br/>Note: `tpo.loanOfficers` and `tpo.branches` cannot be requested using this call - these must be fetched individually per application.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.pointOfContact,tpo.team,tpo.tradeNames,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.licensedStates,tpo.stateLicenses`<br/><br/>If you receive an error trying to fetch all applications with many complex fields, you may be trying to fetch too much data at once - try again with simpler fields. You can fetch complex data using the `Fetch an application` endpoint for a single application.</Info>",
         "parameters": [
           {
               "name": "fields",
@@ -63,7 +63,7 @@
     },
     "/applications/{applicationId}": {
       "get": {
-        "description": "Fetch a specific application, specifying the `applicationId` and the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.licensedStates,tpo.pointOfContact,tpo.team,tpo.tradeNames,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.stateLicenses,tpo.branches`</Info>",
+        "description": "Fetch a specific application, specifying the `applicationId` and the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo` object should be specifically requested with the format `tpo.name`.<br/><br/>**For example, to return all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.pointOfContact,tpo.team,tpo.tradeNames,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,tpo.licensedStates,tpo.stateLicenses,tpo.processors,tpo.loanOfficers,tpo.branches`</Info>",
         "parameters": [
           {
             "name": "applicationId",
@@ -209,11 +209,6 @@
               "stockSymbol": { "type": "string", "description": "(if applicable)" },
               "ncua": { "type": "string", "description": "(if applicable)" },
               "fdic": { "type": "string", "description": "(if applicable)" },
-              "licensedStates": {
-                "type": "array",
-                "description": "Synced with NMLS. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`)",
-                "items": { "type": "string" }
-              },
               "pointOfContact": {
                 "type": "object",
                 "description": "The point of contact indicated on the TPO's company.",
@@ -329,6 +324,11 @@
                   "usda": { "type": "string" }
                 }
               },
+              "licensedStates": {
+                "type": "array",
+                "description": "Synced with NMLS. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`)",
+                "items": { "type": "string" }
+              },
               "stateLicenses": {
                 "type": "array",
                 "description": "Synced with NMLS. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`)",
@@ -346,9 +346,96 @@
                   }
                 }
               },
+              "processors": {
+                "type": "array",
+                "description": "Processor information is provided directly by TPO managers via Loanscape.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "phone": { "type": "string" },
+                    "isContractProcessor": { "type": "boolean" },
+                    "nmls": { 
+                      "type": "string", 
+                      "description": "NMLS is only provided if the processor is a contract processor."
+                    }
+                  }
+                }
+              },
+              "loanOfficers": {
+                "type": "array",
+                "description": "Synced with NMLS. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`). TPO managers add the `email` and `phone` fields to synced loan officers via Loanscape. Cannot be requested with the `Fetch all applications` endpoint - only when fetching an individual application.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "nmls": { "type": "string" },
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "phone": { "type": "string" },
+                    "otherNames": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "licensedStates": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "stateLicenses": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "licenseId": { "type": "string" },
+                          "licenseType": { "type": "string" },
+                          "licenseNumber": { "type": "string" },
+                          "status": { "type": "string" },
+                          "regulator": { "type": "string" },
+                          "state": { "type": "string" },
+                          "issueDate": { "type": "string" },
+                          "statusDate": { "type": "string" }
+                        }
+                      }
+                    },
+                    "federalRegistrations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "registrationId": { "type": "string" },
+                          "regulator": { "type": "string" },
+                          "statusDate": { "type": "string" }
+                        }
+                      }
+                    },
+                    "branches": {
+                      "type": "array",
+                      "description": "This refers to the branches the loan officer is working at. The `nmls` of a branch can be connected to a branch in `tpo.branches`.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "nmls": { "type": "string" },
+                          "address": {
+                            "type": "object",
+                            "properties": {
+                              "line1": { "type": "string" },
+                              "city": { "type": "string" },
+                              "state": { "type": "string" },
+                              "zip": { "type": "string" }
+                            }
+                          },
+                          "startDate": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
               "branches": {
                 "type": "array",
-                "description": "Synced with NMLS. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`)",
+                "description": "Synced with NMLS. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`). Cannot be requested with the `Fetch all applications` endpoint - only when fetching an individual application.",
                 "items": {
                   "type": "object",
                   "properties": {

@@ -6,8 +6,9 @@ title: 'Changelog'
 
 We're adding detailed licensing information to `tpo.branches`, now synced with NMLS.
 
-We're adding some fields to the `tpo` object within applications:
+We're adding some new fields to the `tpo` object within applications:
 - `tpo.stateLicenses` (now synced with NMLS)
+- `tpo.loanOfficers` (now synced with NMLS - TPO managers also provide `email` and `phone` for loan officers via Loanscape, and this is available via the dashboard and public API)
 - `tpo.businessStructure`
 - `tpo.stockSymbol`
 - `tpo.ncua`
@@ -15,14 +16,13 @@ We're adding some fields to the `tpo` object within applications:
 
 We're removing `ncua` and `fdic` from `tpo.industryApprovals` as they can now be found above. We're adding `ginnieMae` to `tpo.industryApprovals`.
 
-We're removing `tpo.contractProcessors`.
-
 Users within `tpo.team` now have an `isAuthorizedSigner` field.
 
 We're renaming a couple fields:
 - `tpo.operatingStates` -> `tpo.licensedStates` (now synced with NMLS)
 - `tpo.dbas` -> `tpo.tradeNames` (now synced with NMLS)
+- `tpo.contractProcessors` -> `tpo.processors` (TPO managers provide this information via Loanscape, and this is available via the dashboard and public API. An `isContractProcessor` field is present to indicate if each processor is a contract processor.)
 
 <Tip>
-  **Tip**: we don't recommend using the `Fetch all applications` endpoint with many complex fields. This can cause errors as a result of trying to fetch too much data at once. You can fetch complex, detailed data using the `Fetch an application` endpoint for a single application.
+  **Tip**: `tpo.loanOfficers` and `tpo.branches` cannot be requested using the `Fetch all applications` endpoint. In general, we don't recommend using the `Fetch all applications` endpoint with many complex fields. This can cause errors as a result of trying to fetch too much data at once. You can fetch complex, detailed data using the `Fetch an application` endpoint for a single application.
 </Tip>
