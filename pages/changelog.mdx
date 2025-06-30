@@ -2,27 +2,37 @@
 title: 'Changelog'
 ---
 
-###  June 2025 
+###  July 2025 
 
-We're adding detailed licensing information to `tpo.branches`, now synced with NMLS.
+We're adding a `licensing` object within applications which contains detailed licensing information, synced with NMLS. This is a premium feature - contact the Loanscape team to confirm that you have access.
 
-We're adding some new fields to the `tpo` object within applications:
-- `tpo.stateLicenses` (now synced with NMLS)
-- `tpo.loanOfficers` (now synced with NMLS - TPO managers also provide `email` and `phone` for loan officers via Loanscape, and this is available via the dashboard and public API)
+The licensing object contains the following fields:
+
+- `licensing.tradeNames`
+- `licensing.licensedStates`
+- `licensing.stateLicenses`
+- `licensing.processors`
+- `licensing.loanOfficers`
+- `licensing.branches`
+
+Some of these fields previously existed on the `tpo` object and took a different format, manually inputted by the TPO. These fields are being removed:
+
+- `tpo.tradeNames`
+- `tpo.operatingStates`
+- `tpo.dbas`
+- `tpo.contractProcessors`
+
+We're adding the following fields to the `tpo` object within applications:
+
 - `tpo.businessStructure`
 - `tpo.stockSymbol`
 - `tpo.ncua`
 - `tpo.fdic`
 
-We're removing `ncua` and `fdic` from `tpo.industryApprovals` as they can now be found above. We're adding `ginnieMae` to `tpo.industryApprovals`.
+We're removing `tpo.industryApprovals.ncua` and `tpo.industryApprovals.fdic` as they can now be found above. We're adding `tpo.industryApprovals.ginnieMae`.
 
 Users within `tpo.team` now have an `isAuthorizedSigner` field.
 
-We're renaming a couple fields:
-- `tpo.operatingStates` -> `tpo.licensedStates` (now synced with NMLS)
-- `tpo.dbas` -> `tpo.tradeNames` (now synced with NMLS)
-- `tpo.contractProcessors` -> `tpo.processors` (TPO managers provide this information via Loanscape, and this is available via the dashboard and public API. An `isContractProcessor` field is present to indicate if each processor is a contract processor.)
-
 <Tip>
-  **Tip**: `tpo.loanOfficers` and `tpo.branches` cannot be requested using the `Fetch all applications` endpoint. In general, we don't recommend using the `Fetch all applications` endpoint with many complex fields. This can cause errors as a result of trying to fetch too much data at once. You can fetch complex, detailed data using the `Fetch an application` endpoint for a single application.
+  **Tip**: `licensing.loanOfficers` and `licensing.branches` cannot be requested using the `Fetch all applications` endpoint. In general, we don't recommend using the `Fetch all applications` endpoint with many complex fields. This can cause errors as a result of trying to fetch too much data at once. You can fetch complex, detailed data using the `Fetch an application` endpoint for a single application.
 </Tip>
