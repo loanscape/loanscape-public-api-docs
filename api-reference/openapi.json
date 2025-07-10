@@ -416,12 +416,13 @@
                         }
                       }
                     },
-                    "branches": {
+                    "locations": {
                       "type": "array",
-                      "description": "This refers to the branches the loan officer is working at. The `nmls` of a branch can be connected to a branch in `tpo.branches`.",
+                      "description": "This refers to the office locations that the loan officer works at. The `locationType` can be `main` (the company's main address), `work` (a personal office address) or `branch`. If `locationType` is `branch`, the `nmls` field is present and can be connected to a branch in `tpo.branches`.",
                       "items": {
                         "type": "object",
                         "properties": {
+                          "locationType":  { "type": "string" },
                           "nmls": { "type": "string" },
                           "address": {
                             "type": "object",
