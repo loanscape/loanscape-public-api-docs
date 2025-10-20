@@ -436,6 +436,10 @@
                           "startDate": { "type": "string" }
                         }
                       }
+                    },
+                    "missingFromNmls": { 
+                      "type": "boolean", 
+                      "description": "If `true`, this loan officer was manually added by the TPO, and has not yet been found in NMLS records. Only the `nmls`, `name`, `email` and `phone` fields will be populated - the other fields specified will return empty array."
                     }
                   }
                 }
