@@ -1,0 +1,66 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Loanscape API",
+  "colors": {
+    "primary": "#1570EF",
+    "light": "#1570EF",
+    "dark": "#1570EF"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "groups": [
+      {
+        "group": "General",
+        "pages": [
+          "pages/introduction",
+          "pages/changelog",
+          "pages/withdrawn-applications"
+        ]
+      },
+      {
+        "group": "API Endpoints",
+        "pages": [
+          "pages/authentication",
+          "api-reference/endpoint/fetch_applications",
+          "api-reference/endpoint/fetch_application"
+        ]
+      },
+      {
+        "group": "Webhooks",
+        "pages": [
+          "pages/webhook-setup",
+          "pages/webhook-events",
+          "pages/webhook-testing"
+        ]
+      }
+    ]
+  },
+  "styling": {
+    "codeblocks": "dark"
+  },
+  "logo": {
+    "light": "/images/logo.png",
+    "dark": "/images/logo.png"
+  },
+  "appearance": {
+    "default": "light",
+    "strict": true
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support and feedback",
+        "href": "mailto:team@loanscape.io"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Back to Loanscape",
+      "href": "https://app.loanscape.io"
+    }
+  },
+  "footer": {
+    "socials": {}
+  }
+}
