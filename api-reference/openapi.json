@@ -254,6 +254,7 @@
               },
               "owners": {
                 "type": "array",
+                "description": "Required as part of the company profile for all TPOs besides those with a `businessStructure` of `publicly-traded-corporation`, `bank`, `credit-union` or `non-profit-corporation`",
                 "items": {
                   "type": "object",
                   "properties": {
