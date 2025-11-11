@@ -120,7 +120,7 @@
             "type": "string"
           },
           "status": {
-            "description": "The status of the application: `pending`, `active`, `pending_renewal`, `deactivated`, `denied` or `withdrawn`.",
+            "description": "The status of the application: `pending`, `active`, `pending_renewal`, `deactivated`, `denied` or `discarded`",
             "type": "string"
           },
           "tag": { 
@@ -573,6 +573,79 @@
                         }
                       }
                     }
+                  }
+                }
+              }
+            }
+          },
+          "los": {
+            "type": "object",
+            "description": "LOS information for the TPO - `los.users`, `los.compensation` and `los.loanCriteria`. This data is only available if the **LOS Access** and/or **Compensation** document has been enabled for your company and is active in the TPO's application. If you're not sure, reach out to the Loanscape team for guidance.",
+            "properties": {
+              "users": {
+                "type": "array",
+                "description": "Users with access to the LOS as defined in the **LOS Access** section of an application. This section is visible if the **LOS Access** document is active for that TPO. These users are pulled from a TPO's licensed loan officers (synced with NMLS), manually added loan officers and manually added processors. Users with the `No Access` persona are not returned via the API.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "personas": {
+                      "type": "array",
+                      "description": "These are defined per lender but the standard personas are `Admin`, `Loan Officer` and `Processor`",
+                      "items": { "type": "string" }
+                    },
+                    "nmls": { 
+                      "type": "string",
+                      "description": "Not always present (for example, not present for a manually added processor who is not a contract processor)."
+                    },
+                    "name": { 
+                      "type": "string"
+                    },
+                    "email": { 
+                      "type": "string",
+                      "description": "Present if provided by the TPO (may not be present for loan officers synced from NMLS that the TPO has not yet \"enriched\" with contact information)."
+                    },
+                    "phone": { 
+                      "type": "string",
+                      "description": "Present if provided by the TPO (may not be present for loan officers synced from NMLS that the TPO has not yet \"enriched\" with contact information)."
+                    }
+                  }
+                }
+              },
+              "compensation": {
+                "type": "array",
+                "description": "The latest approved compensation amounts per channel as provided in the **Compensation** section of an application. This section is visible if the **Compensation** document is active for that TPO.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "channel": {
+                      "type": "string",
+                      "description": "The name of the channel, as seen in Loanscape e.g. `Wholesale/Broker`",
+                      "items": { "type": "string" }
+                    },
+                    "value": { 
+                      "type": "string",
+                      "description": "The percentage amount, presented as a string - exactly as seen in Loanscape but with the `%` character stripped, if present. For example, if `3.00%` is seen in Loanscape, `3.00` will be returned here."
+                    },
+                    "dateUpdated": { 
+                      "type": "string",
+                      "description": "The date that this channel's value was last updated. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z)"
+                    }
+                  }
+                }
+              },
+              "loanCriteria": {
+                "type": "object",
+                "description": "The data submitted for each TPO within the **Loan Criteria** section. This section is visible if the **LOS Access** document is active for that TPO.",
+                "properties": {
+                  "loanTypes": {
+                    "type": "array",
+                    "description": "An array of strings. Each string is returned exactly as specified in Loanscape, e.g. `Conventional` or `Non-QM - Full Doc`",
+                    "items": { "type": "string" }
+                  },
+                  "approvedLoanPurposes": {
+                    "type": "array",
+                    "description": "An array of strings. Each string is returned exactly as specified in Loanscape, e.g. `Construction-Perm` or `Other`",
+                    "items": { "type": "string" }
                   }
                 }
               }

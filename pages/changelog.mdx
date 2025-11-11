@@ -2,6 +2,18 @@
 title: 'Changelog'
 ---
 
+### November 2025
+
+You can now pass `?fields=*` to return all fields instead of manually specifying fields.
+
+We're making `tpo.companyOwners` within applications available via the API.
+
+We're making the `los` object within applications available via the API:
+
+- `los.users` and `los.loanCriteria` are available for applications with the **LOS Access** document active with data submitted - all updates will be automatically synced.
+- `los.compensation` is available for applications with the **Compensation** document active with data submitted - only approved compensation data will be available via the API.
+- Ask the Loanscape team to enable `los` features for you if these documents aren't present in your settings under **Onboarding > Documents > Default**.
+
 ###  July 2025 
 
 We're adding a `licensing` object within applications which contains detailed licensing information, synced with NMLS. This is a premium feature - contact the Loanscape team to confirm that you have access.
