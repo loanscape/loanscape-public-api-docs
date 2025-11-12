@@ -26,7 +26,7 @@
           {
               "name": "fields",
               "in": "query",
-              "description": "Additional fields to fetch. Separate multiple fields with commas. (optional)",
+              "description": "Additional fields to fetch. Separate multiple fields with commas. Leave this blank to only return `applicationId` or pass `fields=*` to return all available fields.",
               "required": false,
               "schema": {
                 "type": "string"
@@ -77,7 +77,7 @@
           {
             "name": "fields",
             "in": "query",
-            "description": "Additional fields to fetch. Separate multiple fields with commas. (optional)",
+            "description": "Additional fields to fetch. Separate multiple fields with commas. Leave this blank to only return `applicationId` or pass `fields=*` to return all available fields.",
             "required": false,
             "schema": {
               "type": "string"
@@ -505,10 +505,6 @@
                           "startDate": { "type": "string" }
                         }
                       }
-                    },
-                    "missingFromNmls": { 
-                      "type": "boolean", 
-                      "description": "If `true`, this loan officer was manually added by the TPO, and has not yet been found in NMLS records. Only the `nmls`, `name`, `email` and `phone` fields will be populated - the other fields specified will return an empty array."
                     }
                   }
                 }
@@ -580,11 +576,11 @@
           },
           "los": {
             "type": "object",
-            "description": "LOS information for the TPO - `los.users`, `los.compensation` and `los.loanCriteria`. This data is only available if the **LOS Access** and/or **Compensation** document has been enabled for your company and is active in the TPO's application. If you're not sure, reach out to the Loanscape team for guidance.",
+            "description": "LOS information for the TPO - `los.users`, `los.compensation` and `los.loanCriteria`. This data is only available if the **LOS Access and/or Compensation** document has been enabled for your company and is active in the TPO's application. If you're not sure, reach out to the Loanscape team for guidance. You should read the [Advanced (Licensing and LOS)](/pages/advanced-features) page to learn more about how the LOS data works and how to use it.",
             "properties": {
               "users": {
                 "type": "array",
-                "description": "Users with access to the LOS as defined in the **LOS Access** section of an application. This section is visible if the **LOS Access** document is active for that TPO. These users are pulled from a TPO's licensed loan officers (synced with NMLS), manually added loan officers and manually added processors. Users with the `No Access` persona are not returned via the API.",
+                "description": "Users with access to the LOS as defined in the **LOS Access** section of an application. This section is visible if the **LOS Access** document is active for that TPO. These users are pulled from a TPO's licensed loan officers (synced with NMLS), manually added loan officers and manually added processors. Users with the `No Access` persona are not returned. Users without an `email` provided are not returned.",
                 "items": {
                   "type": "object",
                   "properties": {
@@ -602,11 +598,15 @@
                     },
                     "email": { 
                       "type": "string",
-                      "description": "Present if provided by the TPO (may not be present for loan officers synced from NMLS that the TPO has not yet \"enriched\" with contact information)."
+                      "description": "Provided by the TPO - individuals will only show in `los.users` if an email has been provided. (There may be licensed loan officers who do *not* appear in `los.users` because no email has been provided.)"
                     },
                     "phone": { 
                       "type": "string",
-                      "description": "Present if provided by the TPO (may not be present for loan officers synced from NMLS that the TPO has not yet \"enriched\" with contact information)."
+                      "description": "Provided by the TPO - will almost always be present, as phone is also required when a TPO provides the email address for an individual."
+                    },
+                    "canViewAllLoans": {
+                      "type": "boolean",
+                      "description": "`true` if their checkbox \"Can view team's loans\" is selected."
                     }
                   }
                 }

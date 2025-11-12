@@ -1,0 +1,58 @@
+---
+title: 'Advanced (Licensing and LOS)'
+---
+
+# Licensing 
+
+<Tip>Access to NMLS and licensing data is a premium feature - contact the Loanscape team to enable it for your company.</Tip>
+
+The licensing section within Loanscape - and the `licensing` section within the API - is synced with NMLS.
+
+This covers data like trade names and state licenses for the TPO, loan officers and their licenses, and more. All licenses that appear are active, and all loan officers that appear have at least one active license. We don't show licenses that are expired or inactive, or loan officers that are no longer licensed.
+
+The only exception is `licensing.processors` - these are individuals manually added by the TPO, as opposed to being synced from NMLS.
+
+The TPO can manually add loan officers which have not yet appeared in the NMLS database, and we maintain their record and populate their licenses when they do appear. However, such loan officers will not be present in `licensing.loanOfficers` until they do appear in the NMLS database. (This feature - manually adding loan officers - is intended for use with the LOS features below.)
+
+# LOS
+
+<Tip>LOS features are enabled per lender. If you can't see the **LOS Access** and **Compensation** options in your settings under **Onboarding > Documents > Default**, contact the Loanscape team to enable it for your company. Once you enable these documents as standard requirements, the **LOS** section will appear within applications where the **LOS Access** and/or **Compensation** documents are active.</Tip>
+
+When the **LOS Access** and/or **Compensation** documents are active for a TPO, the **LOS** section appears.
+
+This contains three sections: **Access**, **Compensation** and **Loan Criteria**.
+
+The API returns this data as `los.users`, `los.compensation` and `los.loanCriteria` accordingly.
+
+**Compensation** and **Loan Criteria** are fairly straightforward - we cover how these work and the fields available from the application specification within the endpoint documentation.
+
+**Access** is more complex, and links into the **Licensing** feature...
+
+## Access
+
+This merges the TPO's loan officers and processors into a single list, present as `los.users` in the API.
+
+This includes manually added loan officers. A TPO may manually add loan officers if there is an individual who needs access to the LOS but whose licensing data has not yet appeared in the NMLS database. (When that loan officer does appear in NMLS records, we "upgrade" them automatically and populate their licenses in `licensing.loanOfficers` automatically.)
+
+So the `los.users` array is *connected* to `licensing.loanOfficers` and `licensing.processors` but is not exactly the same. It merges the individuals from `licensing.loanOfficers`, `licensing.processors`, plus any manually added loan officers into a single array. Individuals without an `email` provided are not returned in `los.users`. The users in `los.users` have different fields to those in `licensing.loanOfficers` and `licensing.processors`, intended for use with an LOS system.
+
+#### Personas
+
+Each user in `los.users` has a `personas` array. By default, the persona options are `Admin`, `Loan Officer` and `Processor` but each lender can define their own personas. Additionally, users can have a persona of `No Access`.
+
+Here are some rules about how personas work:
+- Only lenders have *full* control to edit each user's persona(s)
+- Users can have multiple personas - unless their persona is `No Access`, in which case that's their only persona and they won't appear via the API in `los.users`
+- Only a lender can change a user's persona to `No Access`, or "upgrade" a user who currently has `No Access`
+- When a TPO manually adds a loan officer (not yet found on NMLS), they start off with `No Access` and a lender must "upgrade" them (they also upgrade automatically when they appear in NMLS records)
+- TPOs *can* freely update the persona(s) of any loan officers successfully pulled from or synced with NMLS (e.g. they can update that user to an admin or processor)
+- TPOs cannot update the persona(s) of processors, because these were manually added by the TPO. They are assigned a persona of `Processor` and only the lender can update this
+- Users whose personas include `Loan Officer` or `Admin` have the `Can view team's loans` checkbox available (if checked, that user's `canViewAllLoans` field is `true`)
+
+#### Licenses
+
+If you want to look up the licensing data for an individual found in the `los.users` array, you should look at their `nmls` field (if present) and then see if an individual with a matching `nmls` is found in `licensing.loanOfficers`, which is the NMLS data for loan officers. You can then import this licensing data into your LOS along with the user.
+
+If there *is* a matching individual in `licensing.loanOfficers`, then the `nmls` *will* always be present on that individual within `los.users` - there won't be a case where an individual is licensed but their `nmls` happens to not be present in `los.users`.
+
+However, the inverse isn't true - if an individual within `los.users` *does* have an `nmls` field, that doesn't always mean that a matching loan officer with licensing data will be available in `licensing.loanOfficers`. This is because they may have been manually added by the TPO, or they may be a contract processor (for whom an `nmls` is also collected).
