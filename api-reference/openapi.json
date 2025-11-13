@@ -427,6 +427,10 @@
                 "items": {
                   "type": "object",
                   "properties": {
+                    "processorId": { 
+                      "type": "string", 
+                      "description": "A unique identifier for this processor. Use this as a unique identifier instead of `nmls` (which is only present on processors where `isContractProcessor` is `true`."
+                    },
                     "name": { "type": "string" },
                     "email": { "type": "string" },
                     "phone": { "type": "string" },
@@ -444,7 +448,10 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "nmls": { "type": "string" },
+                    "nmls": { 
+                      "type": "string",
+                      "description": "You can use this `nmls` as a unique identifier for this loan officer."
+                    },
                     "name": { "type": "string" },
                     "email": { "type": "string" },
                     "phone": { "type": "string" },
