@@ -68,7 +68,7 @@
           {
             "name": "applicationId",
             "in": "path",
-            "description": "The applicationId of the application to fetch.",
+            "description": "The applicationId of the application to fetch. Try passing `test_65b0dc2d39f534a1253` for a demo application while passing `test/key` for `X-API-KEY`",
             "required": true,
             "schema": {
               "type": "string"
@@ -681,7 +681,8 @@
       "apiKeyAuth": {
         "type": "apiKey",
         "in": "header",
-        "name": "X-API-KEY"
+        "name": "X-API-KEY",
+        "description": "[Generate an API key on Loanscape](http://app.loanscape.io/dashboard/settings/developers) or pass `test/key` to try with demo data."
       }
     }
   }
