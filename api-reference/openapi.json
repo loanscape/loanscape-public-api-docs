@@ -429,7 +429,7 @@
                   "properties": {
                     "processorId": { 
                       "type": "string", 
-                      "description": "A unique identifier for this processor. Use this as a unique identifier instead of `nmls` (which is only present on processors where `isContractProcessor` is `true`."
+                      "description": "A unique identifier for this processor. Use this as a unique identifier instead of `nmls` (which is only present on processors where `isContractProcessor` is `true`)."
                     },
                     "name": { "type": "string" },
                     "email": { "type": "string" },
