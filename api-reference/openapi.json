@@ -444,7 +444,7 @@
               },
               "loanOfficers": {
                 "type": "array",
-                "description": "Synced with NMLS. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`). TPO managers add the `email` and `phone` fields to synced loan officers via Loanscape. Cannot be requested with the `Fetch all applications` endpoint - only when fetching an individual application.",
+                "description": "Synced with NMLS. Cannot be requested with the `Fetch all applications` endpoint - only when fetching an individual application. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`). TPO managers can add the `email` and `phone` fields to synced loan officers via Loanscape - all loan officers are still returned here, even if they do not have contact information filled in. In Loanscape, TPOs *are* able to manually add loan officers which have not yet appeared in NMLS records - such cases are *not* returned here.",
                 "items": {
                   "type": "object",
                   "properties": {
