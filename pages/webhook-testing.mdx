@@ -4,12 +4,12 @@ title: 'Test your implementation'
 
 After setting up webhooks, you can send test events from your [Webhook settings](https://app.loanscape.io/dashboard/settings/developers). 
 
-You can send a `application_created` or `application_updated` event for a demo application. You can then fetch the data for that application with our ["Fetch an application" endpoint](/api-reference/endpoint/fetch_application).
+You can send a `application_created` or `application_updated` event for a demo application. You can then fetch the data for that application with our ["Fetch single application" endpoint](/api-reference/endpoint/fetch_application).
 
 You can use this to test how your systems would respond to a new application being created or updated. In response to the webhook you might fetch the data for that application from our API. You might then store that application in your system for an `application_created` event, or update your records in case of an `application_updated` event.
 
 <Info>
-  When testing webhooks, we'll send a demo application that doesn't actually exist. You can fetch this application with our "Fetch an application" endpoint, but it won't appear in the web app or in the "Fetch all applications" endpoint.
+  When testing webhooks, we'll send a demo application that doesn't actually exist. You can fetch this application with our "Fetch single application" endpoint, but it won't appear in the web app or in the "Fetch all applications" endpoint.
 </Info>
 
 ### Test data
