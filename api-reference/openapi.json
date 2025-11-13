@@ -584,6 +584,10 @@
                 "items": {
                   "type": "object",
                   "properties": {
+                    "userId": {
+                      "type": "string",
+                      "description": "A unique identifier for this user. You should use this as a unique identifier instead of `nmls`, as not all users will have an `nmls` (for example, some processors). If this user was synced from NMLS records (or added manually by the TPO as a loan officer), their `userId` *will* be identical to their NMLS. For users added as processors, their `userId` will be a 24-character hexadecimal string e.g. `6757857b1fbd7eb458a27fec` (even if that processor was also assigned an NMLS)."
+                    },
                     "personas": {
                       "type": "array",
                       "description": "These are defined per lender but the standard personas are `Admin`, `Loan Officer` and `Processor`",
@@ -591,7 +595,7 @@
                     },
                     "nmls": { 
                       "type": "string",
-                      "description": "Not always present (for example, not present for a manually added processor who is not a contract processor)."
+                      "description": "Often but not always present (for example, not present for a manually added processor who is not a contract processor)."
                     },
                     "name": { 
                       "type": "string"
