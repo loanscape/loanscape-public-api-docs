@@ -32,7 +32,7 @@ The API returns this data as `los.users`, `los.compensation` and `los.loanCriter
 
 This merges the TPO's loan officers and processors into a single list, present as `los.users` in the API.
 
-This includes manually added loan officers. A TPO may manually add loan officers if there is an individual who needs access to the LOS but whose licensing data has not yet appeared in the NMLS database. (When that loan officer does appear in NMLS records, we "upgrade" them automatically and populate their licenses in `licensing.loanOfficers` automatically.)
+This includes manually added loan officers. A TPO may manually add loan officers if there is an individual who needs access to the LOS but whose licensing data has not yet appeared in the NMLS database, or the TPO and their loan officers are not licensed with NMLS. (If that loan officer does appear in NMLS records, we "upgrade" them automatically and populate their licenses in `licensing.loanOfficers` automatically.)
 
 So the `los.users` array is *connected* to `licensing.loanOfficers` and `licensing.processors` but is not exactly the same. It merges the individuals from `licensing.loanOfficers`, `licensing.processors`, plus any manually added loan officers into a single array. Individuals without an `email` provided are not returned in `los.users`. The users in `los.users` have different fields to those in `licensing.loanOfficers` and `licensing.processors`, intended for use with an LOS system.
 

@@ -593,7 +593,7 @@
                   "properties": {
                     "userId": {
                       "type": "string",
-                      "description": "A unique identifier for this user. You should use this as a unique identifier instead of `nmls`, as not all users will have an `nmls` (for example, some processors). If this user was synced from NMLS records (or added manually by the TPO as a loan officer), their `userId` *will* be identical to their NMLS. For users added as processors, their `userId` will be a 24-character hexadecimal string e.g. `6757857b1fbd7eb458a27fec` (even if that processor was also assigned an NMLS)."
+                      "description": "A unique identifier for this user. You should use this as a unique identifier instead of `nmls`, as not all users will have an `nmls` (for example, some processors and manually added loan officers). If this user was synced from NMLS records (or added manually by the TPO as a loan officer with an NMLS), their `userId` *will* be identical to their NMLS. TPOs who are not licensed with NMLS can manually add loan officers without an NMLS. For users added as processors, or loan officers without an NMLS, their `userId` will be a 24-character hexadecimal string e.g. `6757857b1fbd7eb458a27fec`."
                     },
                     "personas": {
                       "type": "array",
@@ -602,7 +602,7 @@
                     },
                     "nmls": { 
                       "type": "string",
-                      "description": "Often but not always present (for example, not present for a manually added processor who is not a contract processor)."
+                      "description": "Often but not always present (for example, not present for a manually added processor who is not a contract processor, or a loan officer manually added by a TPO who is not licensed with NMLS)."
                     },
                     "name": { 
                       "type": "string"
