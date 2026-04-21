@@ -21,17 +21,17 @@
   "paths": {
     "/applications": {
       "get": {
-        "description": "Fetch all applications connected to your company, specifying the fields you'd like to retrieve. Sorted by date created, oldest first.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo`,  `licensing` and `los` objects should be specifically requested with the format `tpo.name`, `licensing.tradeNames`, `los.loanCriteria`, etc.<br/><br/>You can return all available fields by passing `fields=*`<br/><br/>Note: access to `licensing` is a premium feature - contact the Loanscape team to confirm that you have access. `licensing.loanOfficers` and `licensing.branches` cannot be requested using this call - these must be fetched individually per application.<br/><br/>**For example, to specify all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.pointOfContact,tpo.team,tpo.owners,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,licensing.tradeNames,licensing.licensedStates,licensing.stateLicenses,licensing.processors,los.users,los.compensation,los.loanCriteria`<br/><br/>If you receive an error trying to fetch all applications with many complex fields, you may be trying to fetch too much data at once - try again with simpler fields. You can fetch complex data using the `Fetch single application` endpoint for a single application.</Info>",
+        "description": "Fetch all applications connected to your company, specifying the fields you'd like to retrieve. Sorted by date created, oldest first.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo`,  `licensing` and `los` objects should be specifically requested with the format `tpo.name`, `licensing.tradeNames`, `los.loanCriteria`, etc.<br/><br/>You can return all available fields by passing `fields=*`<br/><br/>Note: access to `licensing` is a premium feature - contact the Loanscape team to confirm that you have access. `licensing.loanOfficers` and `licensing.branches` cannot be requested using this call - these must be fetched individually per application.<br/><br/>**For example, to specify all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.pointOfContact,tpo.team,tpo.owners,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,licensing.tradeNames,licensing.licensedStates,licensing.stateLicenses,licensing.processors,los.users,los.compensation,los.loanCriteria`<br/><br/>If you receive an error trying to fetch all applications with many complex fields, you may be trying to fetch too much data at once - try again with simpler fields. You can fetch complex data using the `Fetch single application` endpoint for a single application.</Info>",
         "parameters": [
           {
-              "name": "fields",
-              "in": "query",
-              "description": "Additional fields to fetch. Separate multiple fields with commas. Leave this blank to only return `applicationId` or pass `fields=*` to return all available fields.",
-              "required": false,
-              "schema": {
-                "type": "string"
-              },
-              "style": "form"
+            "name": "fields",
+            "in": "query",
+            "description": "Additional fields to fetch. Separate multiple fields with commas. Leave this blank to only return `applicationId` or pass `fields=*` to return all available fields.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
           }
         ],
         "responses": {
@@ -63,7 +63,7 @@
     },
     "/applications/{applicationId}": {
       "get": {
-        "description": "Fetch a specific application, specifying the `applicationId` and the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo`,  `licensing` and `los` objects should be specifically requested with the format `tpo.name`, `licensing.tradeNames`, `los.loanCriteria`, etc.<br/><br/>You can return all available fields by passing `fields=*`<br/><br/>Note: access to `licensing` is a premium feature - contact the Loanscape team to confirm that you have access.<br/><br/>**For example, to specify all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.phone,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.pointOfContact,tpo.team,tpo.owners,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,licensing.tradeNames,licensing.licensedStates,licensing.stateLicenses,licensing.processors,licensing.loanOfficers,licensing.branches,los.users,los.compensation,los.loanCriteria`</Info>",
+        "description": "Fetch a specific application, specifying the `applicationId` and the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo`,  `licensing` and `los` objects should be specifically requested with the format `tpo.name`, `licensing.tradeNames`, `los.loanCriteria`, etc.<br/><br/>You can return all available fields by passing `fields=*`<br/><br/>Note: access to `licensing` is a premium feature - contact the Loanscape team to confirm that you have access.<br/><br/>**For example, to specify all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.pointOfContact,tpo.team,tpo.owners,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,licensing.tradeNames,licensing.licensedStates,licensing.stateLicenses,licensing.processors,licensing.loanOfficers,licensing.branches,los.users,los.compensation,los.loanCriteria`</Info>",
         "parameters": [
           {
             "name": "applicationId",
@@ -83,7 +83,7 @@
               "type": "string"
             },
             "style": "form"
-        }
+          }
         ],
         "responses": {
           "200": {
@@ -123,7 +123,7 @@
             "description": "The status of the application: `pending`, `active`, `pending_renewal`, `deactivated`, `denied` or `discarded`",
             "type": "string"
           },
-          "tag": { 
+          "tag": {
             "description": "The tag assigned by the lender's team.",
             "type": "string"
           },
@@ -133,13 +133,32 @@
             "items": {
               "type": "object",
               "properties": {
-                "title": { "type": "string", "description": "E.g. `Non-Del Correspondent`, `Warehouse`, etc." },
-                "status": { "type": "string", "description":  "The status of the channel: `pending`, `approved`, `deactivated` or `denied`." },
-                "dateApplied": { "type": "string", "description":  "The date that the channel was added or restored to pending status." },
-                "dateApproved": { "type": "string", "description": "The date that this channel was initially approved. (On the Loanscape website, within the \"Channels\" section of an application, the date shown under the \"Date Approved\" column will be either dateApproved or dateRenewed, whichever is latest. In the API, this is strictly the date of initial approval.)" },
-                "dateRenewed": { "type": "string", "description":  "The date that the application was last renewed, with this channel selected as part of the renewal." },
-                "dateStatusUpdated": { "type": "string" },
-                "yearlyRenewalDate": { "type": "string" }
+                "title": {
+                  "type": "string",
+                  "description": "E.g. `Non-Del Correspondent`, `Warehouse`, etc."
+                },
+                "status": {
+                  "type": "string",
+                  "description": "The status of the channel: `pending`, `approved`, `deactivated` or `denied`."
+                },
+                "dateApplied": {
+                  "type": "string",
+                  "description": "The date that the channel was added or restored to pending status."
+                },
+                "dateApproved": {
+                  "type": "string",
+                  "description": "The date that this channel was initially approved. (On the Loanscape website, within the \"Channels\" section of an application, the date shown under the \"Date Approved\" column will be either dateApproved or dateRenewed, whichever is latest. In the API, this is strictly the date of initial approval.)"
+                },
+                "dateRenewed": {
+                  "type": "string",
+                  "description": "The date that the application was last renewed, with this channel selected as part of the renewal."
+                },
+                "dateStatusUpdated": {
+                  "type": "string"
+                },
+                "yearlyRenewalDate": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -147,10 +166,18 @@
             "description": "Details of the assigned account executive on the lender's team.",
             "type": "object",
             "properties": {
-              "userId": { "type": "string" },
-              "name": { "type": "string" },
-              "email": { "type": "string" },
-              "phone": { "type": "string" }
+              "userId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              }
             }
           },
           "assignedUsers": {
@@ -159,80 +186,110 @@
             "items": {
               "type": "object",
               "properties": {
-                "userId": { "type": "string" },
-                "name": { "type": "string" },
-                "email": { "type": "string" },
-                "phone": { "type": "string" }
+                "userId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                }
               }
             }
           },
           "nextRenewalDate": {
             "description": "The date that the next yearly document is due from the TPO. Only available for applications with status `active` or `pending_renewal`.",
-            "type": "string" 
+            "type": "string"
           },
-          "dateCreated": { 
+          "dateCreated": {
             "description": "The date that the application was created. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
-            "type": "string" 
+            "type": "string"
           },
-          "dateApproved": { 
+          "dateApproved": {
             "description": "The date that the application was first approved. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z). (On the Loanscape website, the date shown under the \"Date Approved\" column will be either dateApproved or dateRenewed, whichever is latest. In the API, this is strictly the date of initial approval.)",
-            "type": "string" 
+            "type": "string"
           },
-          "dateRenewed": { 
+          "dateRenewed": {
             "description": "The date that the application was last renewed. If this is present, or if an application has status `pending_renewal`, it is a renewal application. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
-            "type": "string" 
+            "type": "string"
           },
-          "dateStatusUpdated": { 
+          "dateStatusUpdated": {
             "description": "The date that the application's status was last updated (for example, renewed or deactivated). This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
-            "type": "string" 
+            "type": "string"
           },
           "tpo": {
             "type": "object",
             "description": "Details of the TPO's company.",
             "properties": {
-              "companyId": { "type": "string" },
-              "name": { "type": "string" },
-              "nmls": { "type": "string" },
+              "companyId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "nmls": {
+                "type": "string"
+              },
               "address": {
                 "type": "object",
                 "properties": {
-                  "line1": { "type": "string" },
-                  "line2": { "type": "string" },
-                  "city": { "type": "string" },
-                  "state": { "type": "string" },
-                  "zip": { "type": "string" }
+                  "line1": {
+                    "type": "string"
+                  },
+                  "line2": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "zip": {
+                    "type": "string"
+                  }
                 }
               },
-              "phone": { "type": "string" },
-              "businessStructure": { 
-                "type": "string", 
+              "businessStructure": {
+                "type": "string",
                 "description": "Options: `llc`, `c-corp`, `s-corp`, `sole-proprietorship`, `lp`, `llp`, `general-partnership`, `partnership`, `lllp`, `trust`, `publicly-traded-corporation`, `bank`, `credit-union`, `non-profit-corporation`"
               },
-              "ein": { 
-                "type": "string", 
+              "ein": {
+                "type": "string",
                 "description": "Present for all business structure types besides `sole-proprietorship`"
               },
-              "stockSymbol": { 
-                "type": "string", 
+              "stockSymbol": {
+                "type": "string",
                 "description": "Present when `businessStructure` is `publicly-traded-corporation`"
               },
-              "ncua": { 
-                "type": "string", 
+              "ncua": {
+                "type": "string",
                 "description": "Present when `businessStructure` is `credit-union`"
               },
-              "fdic": { 
-                "type": "string", 
+              "fdic": {
+                "type": "string",
                 "description": "Present when `businessStructure` is `bank`"
-                
               },
               "pointOfContact": {
                 "type": "object",
                 "description": "The point of contact indicated on the TPO's company.",
                 "properties": {
-                  "userId": { "type": "string" },
-                  "name": { "type": "string" },
-                  "email": { "type": "string" },
-                  "phone": { "type": "string" }
+                  "userId": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  }
                 }
               },
               "team": {
@@ -240,15 +297,27 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "userId": { "type": "string" },
-                    "name": { "type": "string" },
-                    "email": { "type": "string" },
-                    "phone": { "type": "string" },
+                    "userId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
                     "roles": {
                       "type": "array",
-                      "items": { "type": "string" }
+                      "items": {
+                        "type": "string"
+                      }
                     },
-                    "isAuthorizedSigner": { "type": "boolean" }
+                    "isAuthorizedSigner": {
+                      "type": "boolean"
+                    }
                   }
                 }
               },
@@ -258,12 +327,14 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "entityType": { 
-                      "type": "string", 
+                    "entityType": {
+                      "type": "string",
                       "description": "Options: `individual`, `llc`, `c-corp`, `s-corp`, `sole-proprietorship`, `lp`, `llp`, `general-partnership`, `partnership`, `lllp`, `trust`, `publicly-traded-corporation`, `bank`, `credit-union`, `non-profit-corporation`"
                     },
-                    "name": { "type": "string" },
-                    "percentOwnership": { 
+                    "name": {
+                      "type": "string"
+                    },
+                    "percentOwnership": {
                       "type": "number",
                       "description": "A number between 0 and 100 reflecting percent (e.g. `50`, equivalent to 50%)."
                     },
@@ -271,34 +342,44 @@
                       "type": "object",
                       "description": "Present when `entityType` is `individual`.",
                       "properties": {
-                        "line1": { "type": "string" },
-                        "line2": { "type": "string" },
-                        "city": { "type": "string" },
-                        "state": { "type": "string" },
-                        "zip": { "type": "string" }
+                        "line1": {
+                          "type": "string"
+                        },
+                        "line2": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "zip": {
+                          "type": "string"
+                        }
                       }
                     },
-                    "dateOfBirth": { 
+                    "dateOfBirth": {
                       "type": "string",
                       "description": "Takes the format `MM/DD/YYYY`. Present when `entityType` is `individual`"
                     },
-                    "nmls": { 
+                    "nmls": {
                       "type": "string",
                       "description": "Optionally present when `entityType` is `individual`"
                     },
-                    "ein": { 
+                    "ein": {
                       "type": "string",
                       "description": "Present for all entity types besides `individual` and `sole-proprietorship`"
                     },
-                    "stockSymbol": { 
+                    "stockSymbol": {
                       "type": "string",
                       "description": "Present when `entityType` is `publicly-traded-corporation`"
                     },
-                    "ncua": { 
+                    "ncua": {
                       "type": "string",
                       "description": "Present when `entityType` is `credit-union`"
                     },
-                    "fdic": { 
+                    "fdic": {
                       "type": "string",
                       "description": "Present when `entityType` is `bank`"
                     }
@@ -310,16 +391,22 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "company": { "type": "string" },
-                    "amount": { 
+                    "company": {
+                      "type": "string"
+                    },
+                    "amount": {
                       "description": "Amount is a number (e.g. 500) and indicates US dollars.",
-                      "type": "number" 
+                      "type": "number"
                     },
                     "states": {
                       "type": "array",
-                      "items": { "type": "string" }
+                      "items": {
+                        "type": "string"
+                      }
                     },
-                    "expiryDate": { "type": "string" }
+                    "expiryDate": {
+                      "type": "string"
+                    }
                   }
                 }
               },
@@ -328,16 +415,22 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "company": { "type": "string" },
-                    "amount": { 
+                    "company": {
+                      "type": "string"
+                    },
+                    "amount": {
                       "description": "E&O insurance covering the TPO. Amount is a number (e.g. 500) and indicates US dollars.",
-                      "type": "number" 
+                      "type": "number"
                     },
                     "states": {
                       "type": "array",
-                      "items": { "type": "string" }
+                      "items": {
+                        "type": "string"
+                      }
                     },
-                    "expiryDate": { "type": "string" }
+                    "expiryDate": {
+                      "type": "string"
+                    }
                   }
                 }
               },
@@ -346,21 +439,39 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "affiliationType": { "type": "string" },
-                    "companyName": { "type": "string" },
+                    "affiliationType": {
+                      "type": "string"
+                    },
+                    "companyName": {
+                      "type": "string"
+                    },
                     "address": {
                       "type": "object",
                       "properties": {
-                        "line1": { "type": "string" },
-                        "line2": { "type": "string" },
-                        "city": { "type": "string" },
-                        "state": { "type": "string" },
-                        "zip": { "type": "string" }
+                        "line1": {
+                          "type": "string"
+                        },
+                        "line2": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "zip": {
+                          "type": "string"
+                        }
                       }
                     },
-                    "stateOfIncorporation": { "type": "string" },
-                    "stateOfOperation": { "type": "string" },
-                    "percentOwnership": { 
+                    "stateOfIncorporation": {
+                      "type": "string"
+                    },
+                    "stateOfOperation": {
+                      "type": "string"
+                    },
+                    "percentOwnership": {
                       "description": "Number given indicates percent as an integer, not a decimal. For example, 50 indicates 50%.",
                       "type": "number"
                     }
@@ -370,13 +481,27 @@
               "industryApprovals": {
                 "type": "object",
                 "properties": {
-                  "fha": { "type": "string" },
-                  "va": { "type": "string" },
-                  "fannieMae": { "type": "string" },
-                  "freddieMac": { "type": "string" },
-                  "ginnieMae": { "type": "string" },
-                  "mers": { "type": "string" },
-                  "usda": { "type": "string" }
+                  "fha": {
+                    "type": "string"
+                  },
+                  "va": {
+                    "type": "string"
+                  },
+                  "fannieMae": {
+                    "type": "string"
+                  },
+                  "freddieMac": {
+                    "type": "string"
+                  },
+                  "ginnieMae": {
+                    "type": "string"
+                  },
+                  "mers": {
+                    "type": "string"
+                  },
+                  "usda": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -391,10 +516,14 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "name": { "type": "string" },
+                    "name": {
+                      "type": "string"
+                    },
                     "states": {
                       "type": "array",
-                      "items": { "type": "string" }
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   }
                 }
@@ -402,7 +531,9 @@
               "licensedStates": {
                 "type": "array",
                 "description": "Synced with NMLS. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`)",
-                "items": { "type": "string" }
+                "items": {
+                  "type": "string"
+                }
               },
               "stateLicenses": {
                 "type": "array",
@@ -410,14 +541,31 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "licenseId": { "type": "string" },
-                    "licenseType": { "type": "string" },
-                    "licenseNumber": { "type": "string", "description": "(optional)" },
-                    "status": { "type": "string" },
-                    "regulator": { "type": "string" },
-                    "state": { "type": "string" },
-                    "issueDate": { "type": "string" },
-                    "statusDate": { "type": "string" }
+                    "licenseId": {
+                      "type": "string"
+                    },
+                    "licenseType": {
+                      "type": "string"
+                    },
+                    "licenseNumber": {
+                      "type": "string",
+                      "description": "(optional)"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "regulator": {
+                      "type": "string"
+                    },
+                    "state": {
+                      "type": "string"
+                    },
+                    "issueDate": {
+                      "type": "string"
+                    },
+                    "statusDate": {
+                      "type": "string"
+                    }
                   }
                 }
               },
@@ -427,16 +575,24 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "processorId": { 
-                      "type": "string", 
+                    "processorId": {
+                      "type": "string",
                       "description": "A unique identifier for this processor. Use this as a unique identifier instead of `nmls` (which is only present on processors where `isContractProcessor` is `true`)."
                     },
-                    "name": { "type": "string" },
-                    "email": { "type": "string" },
-                    "phone": { "type": "string" },
-                    "isContractProcessor": { "type": "boolean" },
-                    "nmls": { 
-                      "type": "string", 
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
+                    "isContractProcessor": {
+                      "type": "boolean"
+                    },
+                    "nmls": {
+                      "type": "string",
                       "description": "NMLS is only provided if the processor is a contract processor."
                     }
                   }
@@ -448,13 +604,19 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "nmls": { 
+                    "nmls": {
                       "type": "string",
                       "description": "You can use this `nmls` as a unique identifier for this loan officer."
                     },
-                    "name": { "type": "string" },
-                    "email": { "type": "string" },
-                    "phone": { "type": "string" },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
                     "otherNames": {
                       "type": "array",
                       "items": {
@@ -463,21 +625,39 @@
                     },
                     "licensedStates": {
                       "type": "array",
-                      "items": { "type": "string" }
+                      "items": {
+                        "type": "string"
+                      }
                     },
                     "stateLicenses": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
-                          "licenseId": { "type": "string" },
-                          "licenseType": { "type": "string" },
-                          "licenseNumber": { "type": "string" },
-                          "status": { "type": "string" },
-                          "regulator": { "type": "string" },
-                          "state": { "type": "string" },
-                          "issueDate": { "type": "string" },
-                          "statusDate": { "type": "string" }
+                          "licenseId": {
+                            "type": "string"
+                          },
+                          "licenseType": {
+                            "type": "string"
+                          },
+                          "licenseNumber": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "regulator": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "issueDate": {
+                            "type": "string"
+                          },
+                          "statusDate": {
+                            "type": "string"
+                          }
                         }
                       }
                     },
@@ -486,9 +666,15 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "registrationId": { "type": "string" },
-                          "regulator": { "type": "string" },
-                          "statusDate": { "type": "string" }
+                          "registrationId": {
+                            "type": "string"
+                          },
+                          "regulator": {
+                            "type": "string"
+                          },
+                          "statusDate": {
+                            "type": "string"
+                          }
                         }
                       }
                     },
@@ -498,18 +684,32 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "locationType":  { "type": "string" },
-                          "nmls": { "type": "string" },
+                          "locationType": {
+                            "type": "string"
+                          },
+                          "nmls": {
+                            "type": "string"
+                          },
                           "address": {
                             "type": "object",
                             "properties": {
-                              "line1": { "type": "string" },
-                              "city": { "type": "string" },
-                              "state": { "type": "string" },
-                              "zip": { "type": "string" }
+                              "line1": {
+                                "type": "string"
+                              },
+                              "city": {
+                                "type": "string"
+                              },
+                              "state": {
+                                "type": "string"
+                              },
+                              "zip": {
+                                "type": "string"
+                              }
                             }
                           },
-                          "startDate": { "type": "string" }
+                          "startDate": {
+                            "type": "string"
+                          }
                         }
                       }
                     }
@@ -522,15 +722,27 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "nmls": { "type": "string" },
+                    "nmls": {
+                      "type": "string"
+                    },
                     "address": {
                       "type": "object",
                       "properties": {
-                        "line1": { "type": "string" },
-                        "line2": { "type": "string" },
-                        "city": { "type": "string" },
-                        "state": { "type": "string" },
-                        "zip": { "type": "string" }
+                        "line1": {
+                          "type": "string"
+                        },
+                        "line2": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "zip": {
+                          "type": "string"
+                        }
                       }
                     },
                     "managers": {
@@ -538,8 +750,12 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "name": { "type": "string" },
-                          "nmls": { "type": "string" }
+                          "name": {
+                            "type": "string"
+                          },
+                          "nmls": {
+                            "type": "string"
+                          }
                         }
                       }
                     },
@@ -548,31 +764,53 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "name": { "type": "string" },
+                          "name": {
+                            "type": "string"
+                          },
                           "states": {
                             "type": "array",
-                            "items": { "type": "string" }
+                            "items": {
+                              "type": "string"
+                            }
                           }
                         }
                       }
                     },
                     "licensedStates": {
                       "type": "array",
-                      "items": { "type": "string" }
+                      "items": {
+                        "type": "string"
+                      }
                     },
                     "stateLicenses": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
-                          "licenseId": { "type": "string" },
-                          "licenseType": { "type": "string" },
-                          "licenseNumber": { "type": "string" },
-                          "status": { "type": "string" },
-                          "regulator": { "type": "string" },
-                          "state": { "type": "string" },
-                          "issueDate": { "type": "string" },
-                          "statusDate": { "type": "string" }
+                          "licenseId": {
+                            "type": "string"
+                          },
+                          "licenseType": {
+                            "type": "string"
+                          },
+                          "licenseNumber": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "regulator": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "issueDate": {
+                            "type": "string"
+                          },
+                          "statusDate": {
+                            "type": "string"
+                          }
                         }
                       }
                     }
@@ -598,20 +836,22 @@
                     "personas": {
                       "type": "array",
                       "description": "These are defined per lender but the standard personas are `Admin`, `Loan Officer` and `Processor`",
-                      "items": { "type": "string" }
+                      "items": {
+                        "type": "string"
+                      }
                     },
-                    "nmls": { 
+                    "nmls": {
                       "type": "string",
                       "description": "Often but not always present (for example, not present for a manually added processor who is not a contract processor, or a loan officer manually added by a TPO who is not licensed with NMLS)."
                     },
-                    "name": { 
+                    "name": {
                       "type": "string"
                     },
-                    "email": { 
+                    "email": {
                       "type": "string",
                       "description": "Provided by the TPO - individuals will only show in `los.users` if an email has been provided. (There may be licensed loan officers who do *not* appear in `los.users` because no email has been provided.)"
                     },
-                    "phone": { 
+                    "phone": {
                       "type": "string",
                       "description": "Provided by the TPO - will almost always be present, as phone is also required when a TPO provides the email address for an individual."
                     },
@@ -631,13 +871,15 @@
                     "channel": {
                       "type": "string",
                       "description": "The name of the channel, as seen in Loanscape e.g. `Wholesale/Broker`",
-                      "items": { "type": "string" }
+                      "items": {
+                        "type": "string"
+                      }
                     },
-                    "value": { 
+                    "value": {
                       "type": "string",
                       "description": "The percentage amount, presented as a string - exactly as seen in Loanscape but with the `%` character stripped, if present. For example, if `3.00%` is seen in Loanscape, `3.00` will be returned here."
                     },
-                    "dateUpdated": { 
+                    "dateUpdated": {
                       "type": "string",
                       "description": "The date that this channel's value was last updated. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z)"
                     }
@@ -651,19 +893,23 @@
                   "loanTypes": {
                     "type": "array",
                     "description": "An array of strings. Each string is returned exactly as specified in Loanscape, e.g. `Conventional` or `Non-QM - Full Doc`",
-                    "items": { "type": "string" }
+                    "items": {
+                      "type": "string"
+                    }
                   },
                   "approvedLoanPurposes": {
                     "type": "array",
                     "description": "An array of strings. Each string is returned exactly as specified in Loanscape, e.g. `Construction-Perm` or `Other`",
-                    "items": { "type": "string" }
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 }
               }
             }
           }
         }
-      },      
+      },
       "Error": {
         "type": "object",
         "properties": {
