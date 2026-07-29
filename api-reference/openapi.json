@@ -565,6 +565,10 @@
                     },
                     "statusDate": {
                       "type": "string"
+                    },
+                    "renewedThrough": {
+                      "type": "string",
+                      "description": "The year the license has been renewed through (e.g. `2026`, `2025` or `None`). Licenses are renewed through NMLS at the end of each year, but late renewals and renewals processed outside of NMLS are common - a past year or `None` does not mean the license has lapsed. Use the `status` field for the license's current standing."
                     }
                   }
                 }
@@ -657,6 +661,10 @@
                           },
                           "statusDate": {
                             "type": "string"
+                          },
+                          "renewedThrough": {
+                            "type": "string",
+                            "description": "The year the license has been renewed through (e.g. `2026`, `2025` or `None`). Licenses are renewed through NMLS at the end of each year, but late renewals and renewals processed outside of NMLS are common - a past year or `None` does not mean the license has lapsed. Use the `status` field for the license's current standing."
                           }
                         }
                       }
@@ -810,6 +818,10 @@
                           },
                           "statusDate": {
                             "type": "string"
+                          },
+                          "renewedThrough": {
+                            "type": "string",
+                            "description": "The year the license has been renewed through (e.g. `2026`, `2025` or `None`). Licenses are renewed through NMLS at the end of each year, but late renewals and renewals processed outside of NMLS are common - a past year or `None` does not mean the license has lapsed. Use the `status` field for the license's current standing."
                           }
                         }
                       }
