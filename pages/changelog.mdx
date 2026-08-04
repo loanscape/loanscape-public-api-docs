@@ -1,6 +1,19 @@
 ---
-title: 'Changelog'
+title: "Changelog"
 ---
+
+### August 2026
+
+We're adding a new application status: `pending_reactivation`.
+
+Lenders can move a `deactivated` application into `pending_reactivation` to begin the process of reactivating the application. The lender can choose how to request documents for reactivation (e.g. reset document requests to match a fresh initial or renewal application). The TPO can then view and upload due documents. Once ready, the lender can approve the application to return it to `active` status.
+
+TPOs can no longer view or upload due documents to `deactivated` applications. While looking at a `deactivated` application from their dashboard, they can request reactivation (once every 30 days, at most). This alerts the lender so they can consider moving the application into `pending_reactivation` status.
+
+What this means for your integration:
+
+- The `status` field within the `application` object can now return `pending_reactivation`.
+- `nextRenewalDate` is not returned for `pending_reactivation` applications - like `deactivated` applications, they have no renewal date until they're approved back to `active`.
 
 ### November 2025
 
@@ -14,7 +27,7 @@ We're making the `los` object within applications available via the API:
 - `los.compensation` is available for applications with the **Compensation** document active with data submitted - only approved compensation data will be available via the API.
 - Ask the Loanscape team to enable `los` features for you if these documents aren't present in your settings under **Onboarding > Documents > Default**.
 
-###  July 2025 
+### July 2025
 
 We're adding a `licensing` object within applications which contains detailed licensing information, synced with NMLS. This is a premium feature - contact the Loanscape team to confirm that you have access.
 
@@ -46,5 +59,10 @@ We're removing `tpo.industryApprovals.ncua` and `tpo.industryApprovals.fdic` as 
 Users within `tpo.team` now have an `isAuthorizedSigner` field.
 
 <Tip>
-  **Tip**: `licensing.loanOfficers` and `licensing.branches` cannot be requested using the `Fetch all applications` endpoint. In general, we don't recommend using the `Fetch all applications` endpoint with many complex fields. This can cause errors as a result of trying to fetch too much data at once. You can fetch complex, detailed data using the `Fetch single application` endpoint for a single application.
+  **Tip**: `licensing.loanOfficers` and `licensing.branches` cannot be requested
+  using the `Fetch all applications` endpoint. In general, we don't recommend
+  using the `Fetch all applications` endpoint with many complex fields. This can
+  cause errors as a result of trying to fetch too much data at once. You can
+  fetch complex, detailed data using the `Fetch single application` endpoint for
+  a single application.
 </Tip>

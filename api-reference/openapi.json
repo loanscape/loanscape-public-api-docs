@@ -120,7 +120,7 @@
             "type": "string"
           },
           "status": {
-            "description": "The status of the application: `pending`, `active`, `pending_renewal`, `deactivated`, `denied` or `discarded`",
+            "description": "The status of the application: `pending`, `active`, `pending_renewal`, `pending_reactivation`, `deactivated`, `denied` or `discarded`",
             "type": "string"
           },
           "tag": {
