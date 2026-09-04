@@ -1,5 +1,5 @@
 ---
-title: 'Setup'
+title: "Setup"
 ---
 
 Webhooks are POST requests we send to an URL that you specify, to notify you of new or updated applications. After your server receives a webhook event, you can pass the `applicationId` to our [Fetch an aplication](/api-reference/endpoint/get_application) endpoint to fetch the latest data for that application.
@@ -11,7 +11,12 @@ You can set up webhooks in the [API/Webhooks section of your settings screen](ht
 **Webhook secret (optional)**: this will be passed in the `WEBHOOK-SECRET` header of the POST requests. When processing requests from Loanscape, you should verify that the value matches. This verifies that the webhook is really being sent by Loanscape.
 
 <Info>
-  The webhook secret is unrelated to your API token - these can (and should) be different values.
+  The webhook secret is unrelated to your API token - these can (and should) be
+  different values.
 </Info>
 
 **Webhook events & fields to monitor**: choose which events should trigger webhooks, and which fields should trigger the `application_updated` event. You can uncheck fields that aren't important to you - then, updates to this field won't trigger a webhook or be mentioned in `fieldsUpdated`.
+
+### Automatic Retries
+
+If your webhook URL does not respond with a 2xx status, our servers will keep retrying the delivery for up to 3 days, with exponential backoff. The first retry comes after 1 minute, and the delay doubles with each failed attempt (2 minutes, 4 minutes, and so on) up to a maximum of 1 hour between attempts. The Loanscape team will be alerted if your webhook URL has failed to accept webhooks for 3 days, and we'll reach out to offer help.
