@@ -5,12 +5,8 @@ title: 'Events'
 When an application is created or updated, POST requests will be sent to your Webhook URL with a JSON payload of the following format.
 
 You will only be notified of events and updates to fields which are enabled in your [Webhook settings](https://app.loanscape.io/dashboard/settings/developers).
-
-If a TPO updates their company profile or team (e.g. `tpo.name`, `tpo.team`, `tpo.affiliations` etc.) updates will be bundled into a single `application_updated` event sent within an hour.
-
-{/* <Info>
-  If a TPO updates their company profile, their changes will be grouped into a single webhook event sent at the end of the day. Updates to team members will be sent instantly.
-</Info> */}
+ 
+Changes made directly to a particular application (e.g. `status` or `channels`) are bundled and sent once per minute, to avoid flooding your endpoint. Updates to a TPO's company profile (e.g. `tpo.name`), licensing data (e.g. `licensing.loanOfficers`) or LOS users (`los.users`) are bundled into a single `application_updated` event for that TPO and sent once per hour.
 
 ### Body Parameters
 
