@@ -6,7 +6,13 @@ When an application is created or updated, POST requests will be sent to your We
 
 You will only be notified of events and updates to fields which are enabled in your [Webhook settings](https://app.loanscape.io/dashboard/settings/developers).
  
+### Bundling
+
 Changes made directly to a particular application (e.g. `status` or `channels`) are bundled and sent once per minute, to avoid flooding your endpoint. Updates to a TPO's company profile (e.g. `tpo.name`), licensing data (e.g. `licensing.loanOfficers`) or LOS users (`los.users`) are bundled into a single `application_updated` event for that TPO and sent once per hour.
+
+### Automatic Retries
+
+If your webhook URL does not respond with a 2xx status, our servers will keep retrying the delivery for up to 3 days, with exponential backoff. The first retry comes after 1 minute, and the delay doubles with each failed attempt (2 minutes, 4 minutes, and so on) up to a maximum of 1 hour between attempts. The Loanscape team will be alerted if your webhook URL has failed to accept webhooks for 3 days, and we'll reach out to offer help.
 
 ### Body Parameters
 

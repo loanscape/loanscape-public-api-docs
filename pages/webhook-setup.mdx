@@ -16,7 +16,3 @@ You can set up webhooks in the [API/Webhooks section of your settings screen](ht
 </Info>
 
 **Webhook events & fields to monitor**: choose which events should trigger webhooks, and which fields should trigger the `application_updated` event. You can uncheck fields that aren't important to you - then, updates to this field won't trigger a webhook or be mentioned in `fieldsUpdated`.
-
-### Automatic Retries
-
-If your webhook URL does not respond with a 2xx status, our servers will keep retrying the delivery for up to 3 days, with exponential backoff. The first retry comes after 1 minute, and the delay doubles with each failed attempt (2 minutes, 4 minutes, and so on) up to a maximum of 1 hour between attempts. The Loanscape team will be alerted if your webhook URL has failed to accept webhooks for 3 days, and we'll reach out to offer help.
