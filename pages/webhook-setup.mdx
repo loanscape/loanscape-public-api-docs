@@ -2,11 +2,11 @@
 title: "Setup"
 ---
 
-Webhooks are POST requests we send to an URL that you specify, to notify you of new or updated applications. After your server receives a webhook event, you can pass the `applicationId` to our [Fetch an aplication](/api-reference/endpoint/get_application) endpoint to fetch the latest data for that application.
+Webhooks are POST requests we send to one or more URLs that you specify, to notify you of new or updated applications (including updated company profiles or licensing information). After your server receives a webhook event, you can pass the `applicationId` to our [Fetch an aplication](/api-reference/endpoint/get_application) endpoint to fetch the latest data for that application, specifying the fields you need.
 
 You can set up webhooks in the [API/Webhooks section of your settings screen](https://app.loanscape.io/dashboard/settings/developers) on Loanscape.
 
-**Webhook URL**: this is the URL that we will send POST requests to when an application is created or updated.
+**Webhook URL**: this is the URL that we will send POST requests to when an application is created or updated. URLs must use `https://`. You can add up to 5 URLs - every event is sent to every URL, using the same secret and configuration.
 
 **Webhook secret (optional)**: this will be passed in the `WEBHOOK-SECRET` header of the POST requests. When processing requests from Loanscape, you should verify that the value matches. This verifies that the webhook is really being sent by Loanscape.
 
