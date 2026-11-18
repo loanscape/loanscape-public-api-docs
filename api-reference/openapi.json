@@ -480,27 +480,88 @@
               },
               "industryApprovals": {
                 "type": "object",
+                "description": "The TPO's answer for whether they hold each industry approval.",
                 "properties": {
                   "fha": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "held": {
+                        "type": "boolean"
+                      },
+                      "identifier": {
+                        "type": "string",
+                        "description": "The TPO's FHA ID: 10 digits in the format `00000-0000-0`. Only present when `held` is `true`."
+                      }
+                    }
                   },
                   "va": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "held": {
+                        "type": "boolean",
+                      },
+                      "identifier": {
+                        "type": "string",
+                        "description": "The TPO's VA ID: 10 digits in the format `000000-00-00`, or 11 digits in the format `000000-00-00-0`. Only present when `held` is `true`."
+                      }
+                    }
                   },
                   "fannieMae": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "held": {
+                        "type": "boolean"
+                      },
+                      "identifier": {
+                        "type": "string",
+                        "description": "The TPO's Fannie Mae seller/servicer number: 9 digits in the format `00000-000-0`. Only present when `held` is `true`."
+                      }
+                    }
                   },
                   "freddieMac": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "held": {
+                        "type": "boolean"
+                      },
+                      "identifier": {
+                        "type": "string",
+                        "description": "The TPO's Freddie Mac seller/servicer number or TPO number: 6 or 7 digits. Only present when `held` is `true`."
+                      }
+                    }
                   },
                   "ginnieMae": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "held": {
+                        "type": "boolean"
+                      },
+                      "identifier": {
+                        "type": "string",
+                        "description": "The TPO's Ginnie Mae issuer ID: 4 digits. Only present when `held` is `true`."
+                      }
+                    }
                   },
                   "mers": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "held": {
+                        "type": "boolean"
+                      },
+                      "identifier": {
+                        "type": "string",
+                        "description": "The TPO's MERS Org ID: 7 digits. Only present when `held` is `true`."
+                      }
+                    }
                   },
                   "usda": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "held": {
+                        "type": "boolean",
+                        "description": "Whether the TPO is a USDA approved lender. The USDA identifies a company by its tax ID, so there is no `identifier` for this approval - see `tpo.ein`."
+                      }
+                    }
                   }
                 }
               }

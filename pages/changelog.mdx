@@ -2,6 +2,20 @@
 title: "Changelog"
 ---
 
+### November 2026
+
+We're changing the format of `tpo.industryApprovals`.
+
+TPOs now answer "Yes" or "No" (`held`: `true` or `false`) for whether they hold each industry approval (FHA, VA, Fannie Mae, Freddie Mac, Ginnie Mae, MERS and USDA), and a "Yes" requires the identifier that the agency issued to the TPO, in that agency's format. The exception is USDA, which is a "Yes" or "No" only: the USDA identifies a company by its tax ID, which is already available as `tpo.ein`. Previously, each approval was an optional free-text field.
+
+What this means for your integration:
+
+- Each approval within `tpo.industryApprovals` changes from a string to an object. E.g. `"fha": "12345-0000-6"` becomes `"fha": { "held": true, "identifier": "12345-0000-6" }`
+- `held` is `false` when the TPO has answered "no". E.g. `"va": { "held": false }`
+- An approval that the TPO has not answered yet is not returned, so you can tell an explicit "no" apart from an unanswered approval.
+- `held` is the TPO's own statement. Loanscape checks the format of `identifier`, not the status of the approval with the agency.
+- Answers given before this change were free text. We've converted them, but `identifier` may be missing or may not fit the agency's format until the TPO next updates their company profile.
+
 ### August 2026
 
 We're adding a new application status: `pending_reactivation`.
