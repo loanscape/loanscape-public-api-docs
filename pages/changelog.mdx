@@ -2,7 +2,25 @@
 title: "Changelog"
 ---
 
-### November 2026
+## November 2026
+
+#### New API endpoint: Fetch company licensing
+
+We're adding a new endpoint: `GET /nmls/companies/{companyNmls}`.
+
+This returns the NMLS licensing data of any company by its company NMLS ID. You don't need to have an application with the company, and the company doesn't need to be on Loanscape. This is a premium feature - contact the Loanscape team to confirm that you have access.
+
+- Fields are requested in the same way as application fields. By default only `nmls` is returned - request `name`, `address`, `dateUpdated` plus fields within the `licensing` object (e.g. `fields=name,licensing.stateLicenses,licensing.tradeNames`), or pass `fields=*` for everything.
+- `name` is the company's name as registered with NMLS, which can differ from the `tpo.name` of the company on Loanscape.
+- The `licensing` object takes the same format as the `licensing` object within applications.
+- Everything returned comes from NMLS. `licensing.processors`, and the `email` and `phone` of loan officers, are provided by TPOs on Loanscape and remain available only through the application endpoints.
+- The endpoint is limited to 60 requests per minute.
+
+#### Federal registration
+
+We're adding `licensing.federalRegistration` to the `licensing` object, in applications and in the new endpoint. Federally regulated institutions such as banks and credit unions hold a federal registration, usually in place of state licenses, so most of them have no `licensing.stateLicenses`. It's an empty object for a company with no federal registration. A change to a TPO's federal registration now triggers the `application_updated` webhook - enable `licensing.federalRegistration` in your [Webhook settings](https://app.loanscape.io/dashboard/settings/developers) to receive it.
+
+#### Industry approvals format
 
 We're changing the format of `tpo.industryApprovals`.
 
@@ -16,7 +34,7 @@ What this means for your integration:
 - `held` is the TPO's own statement. Loanscape checks the format of `identifier`, not the status of the approval with the agency.
 - Answers given before this change were free text. We've converted them, but `identifier` may be missing or may not fit the agency's format until the TPO next updates their company profile.
 
-### August 2026
+## August 2026
 
 We're adding a new application status: `pending_reactivation`.
 
@@ -29,7 +47,7 @@ What this means for your integration:
 - The `status` field within the `application` object can now return `pending_reactivation`.
 - `nextRenewalDate` is not returned for `pending_reactivation` applications - like `deactivated` applications, they have no renewal date until they're approved back to `active`.
 
-### November 2025
+## November 2025
 
 You can now pass `?fields=*` to return all fields instead of manually specifying fields.
 
@@ -41,7 +59,7 @@ We're making the `los` object within applications available via the API:
 - `los.compensation` is available for applications with the **Compensation** document active with data submitted - only approved compensation data will be available via the API.
 - Ask the Loanscape team to enable `los` features for you if these documents aren't present in your settings under **Onboarding > Documents > Default**.
 
-### July 2025
+## July 2025
 
 We're adding a `licensing` object within applications which contains detailed licensing information, synced with NMLS. This is a premium feature - contact the Loanscape team to confirm that you have access.
 

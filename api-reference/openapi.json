@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Loanscape API",
-    "description": "The Loanscape API allows lenders to fetch data for their applications on Loanscape.",
+    "description": "The Loanscape API allows lenders to fetch data for their applications on Loanscape, and to look up the NMLS licensing data of any company.",
     "license": {
       "name": "UNLICENSED"
     },
@@ -21,7 +21,7 @@
   "paths": {
     "/applications": {
       "get": {
-        "description": "Fetch all applications connected to your company, specifying the fields you'd like to retrieve. Sorted by date created, oldest first.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo`,  `licensing` and `los` objects should be specifically requested with the format `tpo.name`, `licensing.tradeNames`, `los.loanCriteria`, etc.<br/><br/>You can return all available fields by passing `fields=*`<br/><br/>Note: access to `licensing` is a premium feature - contact the Loanscape team to confirm that you have access. `licensing.loanOfficers` and `licensing.branches` cannot be requested using this call - these must be fetched individually per application.<br/><br/>**For example, to specify all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.pointOfContact,tpo.team,tpo.owners,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,licensing.tradeNames,licensing.licensedStates,licensing.stateLicenses,licensing.processors,los.users,los.compensation,los.loanCriteria`<br/><br/>If you receive an error trying to fetch all applications with many complex fields, you may be trying to fetch too much data at once - try again with simpler fields. You can fetch complex data using the `Fetch single application` endpoint for a single application.</Info>",
+        "description": "Fetch all applications connected to your company, specifying the fields you'd like to retrieve. Sorted by date created, oldest first.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo`,  `licensing` and `los` objects should be specifically requested with the format `tpo.name`, `licensing.tradeNames`, `los.loanCriteria`, etc.<br/><br/>You can return all available fields by passing `fields=*`<br/><br/>Note: access to `licensing` is a premium feature - contact the Loanscape team to confirm that you have access. `licensing.loanOfficers` and `licensing.branches` cannot be requested using this call - these must be fetched individually per application.<br/><br/>**For example, to specify all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.pointOfContact,tpo.team,tpo.owners,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,licensing.federalRegistration,licensing.tradeNames,licensing.licensedStates,licensing.stateLicenses,licensing.processors,los.users,los.compensation,los.loanCriteria`<br/><br/>If you receive an error trying to fetch all applications with many complex fields, you may be trying to fetch too much data at once - try again with simpler fields. You can fetch complex data using the `Fetch single application` endpoint for a single application.</Info>",
         "parameters": [
           {
             "name": "fields",
@@ -63,7 +63,7 @@
     },
     "/applications/{applicationId}": {
       "get": {
-        "description": "Fetch a specific application, specifying the `applicationId` and the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo`,  `licensing` and `los` objects should be specifically requested with the format `tpo.name`, `licensing.tradeNames`, `los.loanCriteria`, etc.<br/><br/>You can return all available fields by passing `fields=*`<br/><br/>Note: access to `licensing` is a premium feature - contact the Loanscape team to confirm that you have access.<br/><br/>**For example, to specify all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.pointOfContact,tpo.team,tpo.owners,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,licensing.tradeNames,licensing.licensedStates,licensing.stateLicenses,licensing.processors,licensing.loanOfficers,licensing.branches,los.users,los.compensation,los.loanCriteria`</Info>",
+        "description": "Fetch a specific application, specifying the `applicationId` and the fields you'd like to retrieve.<Info>By default, only `applicationId` is returned. Optionally request further fields by passing them in the `fields` parameter in the query. Fields within the `tpo`,  `licensing` and `los` objects should be specifically requested with the format `tpo.name`, `licensing.tradeNames`, `los.loanCriteria`, etc.<br/><br/>You can return all available fields by passing `fields=*`<br/><br/>Note: access to `licensing` is a premium feature - contact the Loanscape team to confirm that you have access.<br/><br/>**For example, to specify all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/applications/<applicationId>?fields=status,tag,channels,assignedAccountExecutive,assignedUsers,nextRenewalDate,dateCreated,dateApproved,dateRenewed,dateStatusUpdated,tpo.companyId,tpo.name,tpo.nmls,tpo.address,tpo.businessStructure,tpo.ein,tpo.stockSymbol,tpo.ncua,tpo.fdic,tpo.pointOfContact,tpo.team,tpo.owners,tpo.suretyBonds,tpo.eoInsurance,tpo.affiliations,tpo.industryApprovals,licensing.federalRegistration,licensing.tradeNames,licensing.licensedStates,licensing.stateLicenses,licensing.processors,licensing.loanOfficers,licensing.branches,los.users,los.compensation,los.loanCriteria`</Info>",
         "parameters": [
           {
             "name": "applicationId",
@@ -98,6 +98,64 @@
           },
           "400": {
             "description": "Error returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nmls/companies/{companyNmls}": {
+      "get": {
+        "description": "Fetch the NMLS licensing data of any company, specifying its company NMLS ID and the fields you'd like to retrieve. You don't need to have an application with the company, and the company doesn't need to be on Loanscape.<Info>By default, only `nmls` is returned. Optionally request further fields by passing them in the `fields` parameter in the query.<br/><br/>You can return all available fields by passing `fields=*`<br/><br/>Note: this is a premium feature - contact the Loanscape team to confirm that you have access.<br/><br/>**For example, to specify all possible fields:**<br/>`https://app.loanscape.io/api/v1.0/nmls/companies/<companyNmls>?fields=name,address,dateUpdated,licensing.federalRegistration,licensing.tradeNames,licensing.licensedStates,licensing.stateLicenses,licensing.branches,licensing.loanOfficers`<br/><br/>Everything returned here comes from NMLS. Information that a TPO provides on Loanscape - such as their processors and contact information of loan officers - is only available for TPOs you have an application with, using the application endpoints.<br/><br/>`name` is the company's name as registered with NMLS. This can differ from the `tpo.name` of an application, which is the name the TPO uses on Loanscape - match a company to an application's TPO by NMLS ID (`tpo.nmls`), not by name.</Info>",
+        "parameters": [
+          {
+            "name": "companyNmls",
+            "in": "path",
+            "description": "The company NMLS ID of the company to fetch. Try passing `74115` for a demo company while passing `test/key` for `X-API-KEY`",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Additional fields to fetch. Separate multiple fields with commas. Leave this blank to only return only `nmls` or pass `fields=*` to return all available fields.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "NMLS company licensing data returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NmlsCompany"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests - this endpoint is limited to 60 requests per minute",
             "content": {
               "application/json": {
                 "schema": {
@@ -498,7 +556,7 @@
                     "type": "object",
                     "properties": {
                       "held": {
-                        "type": "boolean",
+                        "type": "boolean"
                       },
                       "identifier": {
                         "type": "string",
@@ -571,6 +629,19 @@
             "type": "object",
             "description": "Licensing information for the TPO, their branches and their individuals - synced with NMLS. Access to licensing information is a premium feature - contact the Loanscape team to confirm that you have access.",
             "properties": {
+              "federalRegistration": {
+                "type": "object",
+                "description": "Held by federally regulated institutions such as banks and credit unions, usually in place of state licenses. An empty object if the TPO has no federal registration.",
+                "properties": {
+                  "regulator": {
+                    "type": "string",
+                    "description": "E.g. `National Credit Union Administration - Federally Insured`"
+                  },
+                  "isActive": {
+                    "type": "boolean"
+                  }
+                }
+              },
               "tradeNames": {
                 "type": "array",
                 "description": "Synced with NMLS. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`)",
@@ -665,7 +736,7 @@
               },
               "loanOfficers": {
                 "type": "array",
-                "description": "Synced with NMLS. Cannot be requested with the `Fetch all applications` endpoint - only when fetching an individual application. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`). TPO managers can add the `email` and `phone` fields to synced loan officers via Loanscape - all loan officers are still returned here, even if they do not have contact information filled in. In Loanscape, TPOs *are* able to manually add loan officers which have not yet appeared in NMLS records - such \"manually added\" cases are *not* returned here.",
+                "description": "Synced with NMLS. Cannot be requested with the `Fetch all applications` endpoint - only when fetching an individual application. Will not be returned if the TPO has a missing or invalid company NMLS (`tpo.nmls`). TPO managers can add the `email` and `phone` fields to synced loan officers via Loanscape - all loan officers are still returned here, even if they do not have contact information filled in. In Loanscape, TPOs *are* able to manually add loan officers which have not yet appeared in NMLS records - such \"manually added\" cases are *not* returned here. If the TPO has too many loan officers to return in full, the request fails with a `too_many_loan_officers` error - make the request again without `licensing.loanOfficers`.",
                 "items": {
                   "type": "object",
                   "properties": {
@@ -681,6 +752,14 @@
                     },
                     "phone": {
                       "type": "string"
+                    },
+                    "hasActiveStateLicense": {
+                      "type": "boolean",
+                      "description": "`true` if the loan officer has at least one state license in `stateLicenses`."
+                    },
+                    "hasActiveFederalRegistration": {
+                      "type": "boolean",
+                      "description": "`true` if the loan officer has at least one federal registration in `federalRegistrations`."
                     },
                     "otherNames": {
                       "type": "array",
@@ -814,6 +893,10 @@
                         }
                       }
                     },
+                    "hasActiveStateLicense": {
+                      "type": "boolean",
+                      "description": "`true` if the branch has at least one state license in `stateLicenses`."
+                    },
                     "managers": {
                       "type": "array",
                       "items": {
@@ -898,7 +981,7 @@
             "properties": {
               "users": {
                 "type": "array",
-                "description": "Users with access to the LOS as defined in the **LOS Access** section of an application. This section is visible if the **LOS Access** document is active for that TPO. These users are pulled from a TPO's licensed loan officers (synced with NMLS), manually added loan officers and manually added processors. Users with the `No Access` persona are not returned. Users without an `email` provided are not returned.",
+                "description": "Users with access to the LOS as defined in the **LOS Access** section of an application. This section is visible if the **LOS Access** document is active for that TPO. These users are pulled from a TPO's licensed loan officers (synced with NMLS), manually added loan officers and manually added processors. Users with the `No Access` persona are not returned. Users without an `email` provided are not returned. If a TPO has too many loan officers to return in full, the request fails with a `too_many_loan_officers` error naming the application - make the request again without `los.users` (when fetching all applications, you can still fetch `los.users` for each of your other applications with the `Fetch single application` endpoint).",
                 "items": {
                   "type": "object",
                   "properties": {
@@ -983,12 +1066,361 @@
           }
         }
       },
+      "NmlsCompany": {
+        "type": "object",
+        "properties": {
+          "nmls": {
+            "description": "The company's NMLS ID.",
+            "type": "string"
+          },
+          "name": {
+            "description": "The company's name as registered with NMLS.",
+            "type": "string"
+          },
+          "address": {
+            "description": "The company's address as registered with NMLS.",
+            "type": "object",
+            "properties": {
+              "line1": {
+                "type": "string"
+              },
+              "line2": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "zip": {
+                "type": "string"
+              }
+            }
+          },
+          "dateUpdated": {
+            "description": "The date of the NMLS data that this response is based on. This is an ISO string (e.g. 2011-10-05T14:48:00.000Z).",
+            "type": "string"
+          },
+          "licensing": {
+            "type": "object",
+            "description": "Licensing information for the company, its branches and its individuals, from NMLS. Only present if you request at least one of its fields.",
+            "properties": {
+              "federalRegistration": {
+                "type": "object",
+                "description": "Held by federally regulated institutions such as banks and credit unions, usually in place of state licenses. An empty object if the TPO has no federal registration.",
+                "properties": {
+                  "regulator": {
+                    "type": "string",
+                    "description": "E.g. `National Credit Union Administration - Federally Insured`"
+                  },
+                  "isActive": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "tradeNames": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "states": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "licensedStates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "stateLicenses": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "licenseId": {
+                      "type": "string"
+                    },
+                    "licenseType": {
+                      "type": "string"
+                    },
+                    "licenseNumber": {
+                      "type": "string",
+                      "description": "(optional)"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "regulator": {
+                      "type": "string"
+                    },
+                    "state": {
+                      "type": "string"
+                    },
+                    "issueDate": {
+                      "type": "string"
+                    },
+                    "statusDate": {
+                      "type": "string"
+                    },
+                    "renewedThrough": {
+                      "type": "string",
+                      "description": "The year the license has been renewed through (e.g. `2026`, `2025` or `None`). Licenses are renewed through NMLS at the end of each year, but late renewals and renewals processed outside of NMLS are common - a past year or `None` does not mean the license has lapsed. Use the `status` field for the license's current standing."
+                    }
+                  }
+                }
+              },
+              "loanOfficers": {
+                "type": "array",
+                "description": "The individuals currently sponsored by or registered with the company in NMLS. Contact details are not returned here - the `email` and `phone` that a TPO provides for its loan officers are only available for TPOs you have an application with, using the `Fetch single application` endpoint.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "nmls": {
+                      "type": "string",
+                      "description": "You can use this `nmls` as a unique identifier for this loan officer."
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "hasActiveStateLicense": {
+                      "type": "boolean",
+                      "description": "`true` if the loan officer has at least one state license in `stateLicenses`."
+                    },
+                    "hasActiveFederalRegistration": {
+                      "type": "boolean",
+                      "description": "`true` if the loan officer has at least one federal registration in `federalRegistrations`."
+                    },
+                    "otherNames": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "licensedStates": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "stateLicenses": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "licenseId": {
+                            "type": "string"
+                          },
+                          "licenseType": {
+                            "type": "string"
+                          },
+                          "licenseNumber": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "regulator": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "issueDate": {
+                            "type": "string"
+                          },
+                          "statusDate": {
+                            "type": "string"
+                          },
+                          "renewedThrough": {
+                            "type": "string",
+                            "description": "The year the license has been renewed through (e.g. `2026`, `2025` or `None`). Licenses are renewed through NMLS at the end of each year, but late renewals and renewals processed outside of NMLS are common - a past year or `None` does not mean the license has lapsed. Use the `status` field for the license's current standing."
+                          }
+                        }
+                      }
+                    },
+                    "federalRegistrations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "registrationId": {
+                            "type": "string"
+                          },
+                          "regulator": {
+                            "type": "string"
+                          },
+                          "statusDate": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "locations": {
+                      "type": "array",
+                      "description": "This refers to the office locations that the loan officer works at. The `locationType` can be `main` (the company's main address), `work` (a personal office address) or `branch`. If `locationType` is `branch`, the `nmls` field refers to the branch NMLS and can be connected to a branch in `licensing.branches`. If `locationType` is `main` or `work`, the `nmls` field refers to the company NMLS.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "locationType": {
+                            "type": "string"
+                          },
+                          "nmls": {
+                            "type": "string"
+                          },
+                          "address": {
+                            "type": "object",
+                            "properties": {
+                              "line1": {
+                                "type": "string"
+                              },
+                              "city": {
+                                "type": "string"
+                              },
+                              "state": {
+                                "type": "string"
+                              },
+                              "zip": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "startDate": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "branches": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "nmls": {
+                      "type": "string"
+                    },
+                    "address": {
+                      "type": "object",
+                      "properties": {
+                        "line1": {
+                          "type": "string"
+                        },
+                        "line2": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "zip": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "hasActiveStateLicense": {
+                      "type": "boolean",
+                      "description": "`true` if the branch has at least one state license in `stateLicenses`."
+                    },
+                    "managers": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "nmls": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "tradeNames": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "states": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "licensedStates": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "stateLicenses": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "licenseId": {
+                            "type": "string"
+                          },
+                          "licenseType": {
+                            "type": "string"
+                          },
+                          "licenseNumber": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "regulator": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "issueDate": {
+                            "type": "string"
+                          },
+                          "statusDate": {
+                            "type": "string"
+                          },
+                          "renewedThrough": {
+                            "type": "string",
+                            "description": "The year the license has been renewed through (e.g. `2026`, `2025` or `None`). Licenses are renewed through NMLS at the end of each year, but late renewals and renewals processed outside of NMLS are common - a past year or `None` does not mean the license has lapsed. Use the `status` field for the license's current standing."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "Error": {
         "type": "object",
         "properties": {
           "error": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "description": "A short code identifying the error, e.g. `invalid_fields`"
           },
           "message": {
             "type": "string"
